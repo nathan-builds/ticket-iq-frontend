@@ -19,9 +19,9 @@ export default function AboutPage() {
                     </h3>
                     <div>
                         At TicketIQ, we understand the excitement and joy that attending live events can bring.
-                        Whether it's a concert, sports game, theater performance, or any other live experience, we
+                        Whether it&apos;s a concert, sports game, theater performance, or any other live experience, we
                         believe
-                        that getting the best-priced tickets should be a hassle-free and enjoyable process. That's why
+                        that getting the best-priced tickets should be a hassle-free and enjoyable process. That&apos;s why
                         we
                         created this platform - to be your ultimate ticket companion.
                     </div>
@@ -43,16 +43,16 @@ export default function AboutPage() {
                     </h3>
                     <ol className="list-decimal pl-4">
                         <li>
-                            Search & Discover: Simply enter the event you're interested in, and let us do the rest. Our
-                            advanced search algorithms scour the internet to find the best ticket options for you.
+                            Search & Discover: Simply enter the performer/team you&apos;re interested in, and let us do the rest. Our
+                            advanced search algorithms use a variety of sources to find the best ticket prices for you.
                         </li>
                         <li className='pt-4'>
                             Compare Prices: We provide a side-by-side comparison of ticket prices from different ticket
                             sites. See all your options at a glance and choose the one that suits your budget.
                         </li>
                         <li className='pt-4'>
-                            Once you've found the perfect ticket, we seamlessly redirect you to the official ticket
-                            provider's website to complete your purchase securely. Rest assured, your transactions are
+                            Once you&apos;ve found the perfect ticket, we seamlessly redirect you to the official ticket
+                            provider&apos;s website to complete your purchase securely. Rest assured, your transactions are
                             in good hands.
                         </li>
                     </ol>
