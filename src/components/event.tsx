@@ -48,11 +48,13 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
     const onAccordionTriggerClickedHandler = async () => {
 
         if (isOpen) {
+            console.log('Was open no action taken')
             setIsOpen(!isOpen);
             return;
         }
         setIsOpen(!isOpen);
         setLoadingPrices(true);
+        console.log('Making request for prices..')
         const vendors = eventInfo.vendors.filter(event => event.productionID !== -1);
         const productions = await APIService.getEventPrices(vendors);
         appendGametime(productions);
