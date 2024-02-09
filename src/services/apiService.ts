@@ -1,7 +1,7 @@
 import { Category, EventsMap, EventsResult, Production, Productions, VendorPartial } from '@/utils/models';
 
 export class APIService {
-    static baseURL = 'http://ticket-iq-production.up.railway.app';
+    static baseURL = 'https://ticket-iq-production.up.railway.app';
     // how long a API request for data is cached
     static CACHE_TIME_SECONDS = 100;
 
