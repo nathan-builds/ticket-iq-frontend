@@ -3,9 +3,9 @@ import { Searchbar } from '@/components/searchbar';
 import Image, { StaticImageData } from 'next/image';
 
 import ticketIQIcon from '../images/logo_lowercase_32.svg';
+import ticketIQIcon1 from '../images/logo_small_uppercase.svg';
 import burgerMenu from '../images/burger_menu.svg';
 import searchIcon from '../images/search_icon.svg';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -17,20 +17,20 @@ export const NavbarResults = () => {
     return (
         <div className="flex flex-col mb-3">
             <div className="flex items-end justify-between h-[50px]">
-                <div className="h-[32px] w-[32px] ml-3 md:invisible">
-                    <Image
-                        className=""
-                        src={burgerMenu}
-                        alt={''}>
-                    </Image>
-                </div>
+                {/*<div className="h-[32px] w-[32px] ml-3 md:invisible">*/}
+                {/*    <Image*/}
+                {/*        className=""*/}
+                {/*        src={burgerMenu}*/}
+                {/*        alt={''}>*/}
+                {/*    </Image>*/}
+                {/*</div>*/}
                 <div className="mr-3">
                     <Link href={'/'}>
                         <Image
-                            className=""
+                            className="pl-3"
                             height={150}
                             width={150}
-                            src={ticketIQIcon}
+                            src={ticketIQIcon1}
                             alt={''}>
                         </Image>
                     </Link>

@@ -35,7 +35,7 @@ export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
                 {props.title}
             </div>
             <div className="whitespace-nowrap overflow-hidden text-ellipsis text-[#475569]">
-                {`${monthDay} - ${venue}`}
+                {`${monthDay?? 'Upcoming'} - ${venue}`}
             </div>
         </div>
     );

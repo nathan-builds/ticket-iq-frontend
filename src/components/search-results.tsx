@@ -39,9 +39,16 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
                 </div>
                 <span className="font-bold text-2xl md:text-xl">Upcoming Events</span>
             </div>
-            <div className="p-2">
-                <TicketIqEvents events={events} sort={sortType} includeFees={includeFees}/>
-            </div>
+            {events.length === 0 ?
+                <div className='self-center pt-28 text-2xl font-bold italic'>
+                    Dang! No upcoming events!
+                </div> :
+                <div className="p-2">
+                    <TicketIqEvents events={events} sort={sortType} includeFees={includeFees}/>
+                </div>
+            }
+
+
         </div>
 
     );

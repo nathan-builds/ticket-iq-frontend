@@ -16,7 +16,6 @@ interface Params {
 export default async function SearchResultsPage(props: PageProps) {
     const eventsResult = await APIService.getPerformerEvents(props.searchParams.performer);
 
-
     return (
         <div>
             <NavbarResults></NavbarResults>

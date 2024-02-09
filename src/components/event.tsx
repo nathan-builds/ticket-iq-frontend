@@ -15,8 +15,6 @@ export interface EventProps {
 
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
     const estTime = convertUTCToLocalEST(eventInfo.datetime_utc);
-    console.log(eventInfo.vendors)
-
     const [loadingPrices, setLoadingPrices] = useState(true);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [productions, setProductions] = useState<Production[]>([]);
@@ -58,7 +56,6 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
         const vendors = eventInfo.vendors.filter(event => event.productionID !== -1);
         const productions = await APIService.getEventPrices(vendors);
         appendGametime(productions);
-        console.log('Productions, ',productions)
         setProductions(productions);
         setLoadingPrices(false);
 
