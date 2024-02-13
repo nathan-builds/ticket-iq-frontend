@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'TicketIQ',
-    description: 'A smarter way to find tickets'
+    description: 'A smarter way to find tickets',
 
 };
 
@@ -18,6 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <head>
+            <meta name="impact-site-verification" content="0239144c-12e6-41a0-9bda-c45e4e9664f7" />
             <link rel="icon" href="/favicon.ico" sizes="any"/>
             <link
                 rel="icon"
