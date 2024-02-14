@@ -28,7 +28,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
 
 
     return (
-        <div className="flex flex-col w-full lg:w-3/4  ">
+        <div className="flex flex-col w-full lg:w-1/2  max-w-[900px]">
             <div className="flex flex-col gap-5">
                 <div className="flex items-center space-x-2 justify-between pl-1">
                     <div className="flex items-center space-x-2">

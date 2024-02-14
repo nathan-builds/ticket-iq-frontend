@@ -20,7 +20,7 @@ export default async function SearchResultsPage(props: PageProps) {
         <div>
             <NavbarResults></NavbarResults>
             <div className=" flex flex-col  md:items-center p-1 gap-5">
-                <div className="w-full lg:w-3/4">
+                <div className="w-full lg:w-1/2  max-w-[900px]">
                     <span
                         className="align self-start font-bold text-3xl md:text-3xl">
                         {eventsResult.attractionName} Tickets

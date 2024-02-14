@@ -32,12 +32,12 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
             return;
         }
 
-        const gametimeProd:Production={
-            minPrice:gametime.minPrice,
-            priceWithFees:gametime.priceWithFees,
-            displayName:'Gametime',
-            vendorName:'gametime'
-        }
+        const gametimeProd: Production = {
+            minPrice: gametime.minPrice,
+            priceWithFees: gametime.priceWithFees,
+            displayName: 'Gametime',
+            vendorName: 'gametime'
+        };
         productions.push(gametimeProd);
     };
 
@@ -48,13 +48,13 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
     const onAccordionTriggerClickedHandler = async () => {
 
         if (isOpen) {
-            console.log('Was open no action taken')
+            console.log('Was open no action taken');
             setIsOpen(!isOpen);
             return;
         }
         setIsOpen(!isOpen);
         setLoadingPrices(true);
-        console.log('Making request for prices..')
+        console.log('Making request for prices..');
         const vendors = eventInfo.vendors.filter(event => event.productionID !== -1);
         const productions = await APIService.getEventPrices(vendors);
         appendGametime(productions);
@@ -72,18 +72,23 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                 <AccordionItem value="item-1">
                     <AccordionTrigger onClick={onAccordionTriggerClickedHandler}>
                         <div className="flex p-2">
-                            <div className="w-[90px] flex flex-col items-start md:w-[150px]">
+                            <div className="w-[90px] flex flex-col items-start md:w-[150px] gap-1">
                                 <span className="font-bold text-md">{getMonthDayString(estTime)}</span>
-                                <span className="text-xs">{getDayOfWeekTimeString(estTime)}</span>
+                                <span className="text-sm">{getDayOfWeekTimeString(estTime)}</span>
                             </div>
-                            <div className="flex flex-col items-start">
-                                <span
-                                    className="font-bold text-md whitespace-nowrap overflow-hidden text-ellipsis max-w-[225px] md:max-w-[500px] lg:max-w-[500px] xl:max-w-[700px]">
+                            <div className="flex flex-col items-start gap-1 pl-2">
+                                  <span
+                                      className="font-bold text-md whitespace-nowrap overflow-hidden text-ellipsis max-w-[225px] md:max-w-[400px] lg:max-w-[275px] xl:max-w-[350px] ">
                                     {eventInfo.title}
+                                </span>
+
+                                <span
+                                    className={' text-sm  whitespace-nowrap overflow-hidden text-ellipsis max-w-[225px] md:max-w-[500px] lg:max-w-[500px] xl:max-w-[700px]'}>
+                                    {eventInfo.venue?.name}
                                 </span>
                                 <span
                                     className={' text-sm  whitespace-nowrap overflow-hidden text-ellipsis max-w-[225px] md:max-w-[500px] lg:max-w-[500px] xl:max-w-[700px]'}>
-                                    {eventInfo.venue?.city},{eventInfo?.venue?.state} - {eventInfo.venue?.name}
+                                    {eventInfo.venue?.city}, {eventInfo?.venue?.state}
                                 </span>
                             </div>
                         </div>
