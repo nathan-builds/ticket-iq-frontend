@@ -2,7 +2,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Production, Productions, TicketIQEvent, VendorPartial } from '@/utils/models';
 import React, { useState } from 'react';
-import { convertUTCToLocalEST, getDayOfWeekTimeString, getMonthDayString } from '@/utils/utils';
+import { utcToESTDayMonthTime } from '@/utils/utils';
 import { PuffLoader } from 'react-spinners';
 import { APIService } from '@/services/apiService';
 import { Vendor } from '@/components/vendor';
@@ -14,7 +14,7 @@ export interface EventProps {
 }
 
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
-    const estTime = convertUTCToLocalEST(eventInfo.datetime_utc);
+    const { dayOfWeek, month, time } = utcToESTDayMonthTime(eventInfo.datetime_utc);
     const [loadingPrices, setLoadingPrices] = useState(true);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [productions, setProductions] = useState<Production[]>([]);
@@ -71,12 +71,12 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
             <Accordion type="single" collapsible className="min-w-[350px] w-full ">
                 <AccordionItem value="item-1">
                     <AccordionTrigger onClick={onAccordionTriggerClickedHandler}>
-                        <div className="flex p-2">
-                            <div className="w-[90px] flex flex-col items-start md:w-[150px] gap-1">
-                                <span className="font-bold text-md">{getMonthDayString(estTime)}</span>
-                                <span className="text-sm">{getDayOfWeekTimeString(estTime)}</span>
+                        <div className="flex ">
+                            <div className="w-[110px] flex flex-col items-start md:w-[150px] gap-1">
+                                <span className="font-bold text-md">{month}</span>
+                                <span className="text-sm">{`${dayOfWeek} - ${time}`}</span>
                             </div>
-                            <div className="flex flex-col items-start gap-1 pl-2">
+                            <div className="flex flex-col items-start gap-1 pl-5">
                                   <span
                                       className="font-bold text-md whitespace-nowrap overflow-hidden text-ellipsis max-w-[225px] md:max-w-[400px] lg:max-w-[275px] xl:max-w-[350px] ">
                                     {eventInfo.title}

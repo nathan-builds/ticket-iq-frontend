@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image';
 import image1 from '../images/head_heart.jpg';
 import React from 'react';
 import { NextEvent } from '@/utils/models';
-import { getMonthDayString } from '@/utils/utils';
+import {  utcToESTDayMonthTime } from '@/utils/utils';
 import { useRouter } from 'next/navigation';
 
 export interface PerformerCardProps {
@@ -14,7 +14,7 @@ export interface PerformerCardProps {
 }
 
 export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
-    const monthDay = getMonthDayString(props.desc.date);
+    const { dayOfWeek, month, time } = utcToESTDayMonthTime(props.desc?.date);
     const venue = props.desc.venue;
     const router = useRouter();
 
@@ -35,7 +35,7 @@ export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
                 {props.title}
             </div>
             <div className="whitespace-nowrap overflow-hidden text-ellipsis text-[#475569]">
-                {`${monthDay?? 'Upcoming'} - ${venue}`}
+                {`${month?? 'Upcoming'} - ${venue}`}
             </div>
         </div>
     );

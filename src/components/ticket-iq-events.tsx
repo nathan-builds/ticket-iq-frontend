@@ -1,12 +1,9 @@
 'use client';
 import { Event } from '@/components/event';
-import React, { useEffect, useState } from 'react';
-import { EventsMap, TicketIQEvent } from '@/utils/models';
-import { getDayOfWeekTimeString, getMonthDayString } from '@/utils/utils';
+import React, { useState } from 'react';
+import { TicketIQEvent } from '@/utils/models';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Sort, SortType } from '@/components/results-filter';
+import { SortType } from '@/components/results-filter';
 
 export interface SearchResultProps {
     events: TicketIQEvent[],
@@ -21,9 +18,9 @@ export interface SearchResultProps {
  * @param events
  * @constructor
  */
-export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort,includeFees }) => {
+export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort, includeFees }) => {
     const [displayIdx, setDisplayIdx] = useState(5);
-    console.log('In ticket iq events sort is ', sort);
+
 
     const onMoreClickedHandler = () => {
         setDisplayIdx(displayIdx + 5);
@@ -31,12 +28,10 @@ export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort,inclu
 
 
     const priceSort = (a: TicketIQEvent, b: TicketIQEvent) => {
-        console.log('Price sort called')
         return a.minPrice - b.minPrice;
     };
 
-    const dateSort = (a: TicketIQEvent,b: TicketIQEvent) => {
-        console.log('Date sort called')
+    const dateSort = (a: TicketIQEvent, b: TicketIQEvent) => {
         return new Date(a.datetime_utc).getTime() - new Date(b.datetime_utc).getTime();
     };
 

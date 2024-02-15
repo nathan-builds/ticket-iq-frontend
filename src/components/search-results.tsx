@@ -18,7 +18,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
     const [includeFees, setIncludeFees] = useState(false);
 
     const onFilterSelectionChangeHandler = (filter: SortType) => {
-        console.log(`Sort changed, in search results type is ${filter}`);
         setSortType(filter);
     };
 
