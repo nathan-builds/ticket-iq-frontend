@@ -14,11 +14,11 @@ export interface EventProps {
 }
 
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
-    const { dayOfWeek, month, time } = utcToESTDayMonthTime(eventInfo.datetime_utc);
+    const { dayOfWeek, month, time,day } = utcToESTDayMonthTime(eventInfo.datetime_utc);
     const [loadingPrices, setLoadingPrices] = useState(true);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [productions, setProductions] = useState<Production[]>([]);
-
+    console.log(`dayOfWeek:${dayOfWeek}, month:${month}, time:${time}`);
 
     /**
      * Gametime info doesnt require extra request right now, its in event info, add it to the productions
@@ -73,7 +73,7 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                     <AccordionTrigger onClick={onAccordionTriggerClickedHandler}>
                         <div className="flex ">
                             <div className="w-[110px] flex flex-col items-start md:w-[150px] gap-1">
-                                <span className="font-bold text-md">{month}</span>
+                                <span className="font-bold text-md">{`${month} ${day}`}</span>
                                 <span className="text-sm">{`${dayOfWeek} - ${time}`}</span>
                             </div>
                             <div className="flex flex-col items-start gap-1 pl-5">

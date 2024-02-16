@@ -14,7 +14,7 @@ export interface PerformerCardProps {
 }
 
 export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
-    const { dayOfWeek, month, time } = utcToESTDayMonthTime(props.desc?.date);
+    const { dayOfWeek, month, time,day } = utcToESTDayMonthTime(props.desc?.date);
     const venue = props.desc.venue;
     const router = useRouter();
 
@@ -35,7 +35,7 @@ export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
                 {props.title}
             </div>
             <div className="whitespace-nowrap overflow-hidden text-ellipsis text-[#475569]">
-                {`${month?? 'Upcoming'} - ${venue}`}
+                {`${month} ${day} - ${venue}`}
             </div>
         </div>
     );
