@@ -6,8 +6,9 @@ export const utcToESTDayMonthTime = (dateTimeString: string): { month: string, d
     // Convert to EST (Eastern Standard Time);
     try {
 
-        console.log(dateTimeString);
-        if (!dateTimeString.endsWith('Z')) {
+        //some dates are formatted as 2024-05-25 and some are 2024-05-26T19:00, adding a Z to the first formatted
+        //date causes an issues on mobile platforms for some reason, might look into this further at some point
+        if (!dateTimeString.endsWith('Z') && dateTimeString.includes(':')) {
             dateTimeString += 'Z';
         }
 
@@ -31,6 +32,6 @@ export const utcToESTDayMonthTime = (dateTimeString: string): { month: string, d
     } catch (e) {
         console.log(`Error occurred with date string ${dateTimeString}`);
     }
-    return{month:'-1',dayOfWeek:'-1',time:'-1'};
+    return{month:'Upcoming',dayOfWeek:'Upcoming',time:'Upcoming'};
 
 };
