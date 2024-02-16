@@ -27,7 +27,7 @@ export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
     return (
         <div
             onClick={onPerformerClickedHandler}
-            className="flex pl-2 flex-col min-h-[175px] min-w-[150px] max-w-[150px]  lg:min-h[350px] lg:min-w-[200px] hover:cursor-pointer z-0 ">
+            className="flex pl-2 flex-col min-h-[175px] min-w-[150px] max-w-[150px]  lg:min-h[450px] lg:min-w-[200px] hover:cursor-pointer z-0 ">
             <div className="rounded-lg border-transparents ">
                 <img src={props.img} className={'rounded-lg border-transparent object-cover transition-all hover:scale-105'}/>
             </div>

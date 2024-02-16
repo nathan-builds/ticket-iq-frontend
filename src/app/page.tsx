@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Category } from '@/utils/models';
 import { APIService } from '@/services/apiService';
+import { PerformerCarousel } from '@/components/performer-carousel';
 
 
 export default async function Home() {
