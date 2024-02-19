@@ -5,8 +5,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'TicketIQ',
-    description: 'A smarter way to find tickets',
+    title: 'TicketHero',
+    description: 'A better way to find tickets',
 
 };
 
