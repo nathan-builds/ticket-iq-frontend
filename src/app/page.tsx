@@ -2,11 +2,8 @@ import Image from 'next/image';
 import { Navbar } from '@/components/navbar';
 import { Searchbar } from '@/components/searchbar';
 import { PerformerSlider } from '@/components/performer-slider';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { Category } from '@/utils/models';
 import { APIService } from '@/services/apiService';
-import { PerformerCarousel } from '@/components/performer-carousel';
+import { TempAlert } from '@/components/temp-alert';
 
 
 export default async function Home() {
@@ -14,6 +11,7 @@ export default async function Home() {
     const categories = await APIService.getHomeSuggestions();
     return (
         <div>
+            <TempAlert/>
             <Navbar/>
             <div className="flex flex-col items-center my-20">
                 <div className="font-semibold text-xl md:text-3xl mb-10">

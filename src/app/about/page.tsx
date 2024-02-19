@@ -10,7 +10,7 @@ export default function AboutPage() {
                         About Us
                     </h3>
                     <div>
-                        Welcome to TicketIQ - your ultimate ticket companion!
+                        Welcome to TicketHero - your ultimate ticket companion!
                     </div>
                 </div>
                 <div className="w-11/12 md:w-1/2">
@@ -18,7 +18,7 @@ export default function AboutPage() {
                         Who We Are
                     </h3>
                     <div>
-                        At TicketIQ, we understand the excitement and joy that attending live events can bring.
+                        At TicketHero, we understand the excitement and joy that attending live events can bring.
                         Whether it&apos;s a concert, sports game, theater performance, or any other live experience, we
                         believe
                         that getting the best-priced tickets should be a hassle-free and enjoyable process. That&apos;s why
