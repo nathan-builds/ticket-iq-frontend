@@ -19,11 +19,14 @@ export interface SearchResultProps {
  * @constructor
  */
 export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort, includeFees }) => {
-    const [displayIdx, setDisplayIdx] = useState(5);
+    const [displayIdx, setDisplayIdx] = useState(10);
 
+    events.forEach(e=>{
+        console.log(e.datetime_utc);
+    })
 
     const onMoreClickedHandler = () => {
-        setDisplayIdx(displayIdx + 5);
+        setDisplayIdx(displayIdx + 10);
     };
 
 

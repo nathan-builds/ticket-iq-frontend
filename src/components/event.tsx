@@ -14,11 +14,11 @@ export interface EventProps {
 }
 
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
-    const { dayOfWeek, month, time,day } = utcToESTDayMonthTime(eventInfo.datetime_utc);
-    const [loadingPrices, setLoadingPrices] = useState(true);
+    const { dayOfWeek, month, time, day } = utcToESTDayMonthTime(eventInfo.datetime_utc);
+    const [loadingPrices, setLoadingPrices] = useState(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [productions, setProductions] = useState<Production[]>([]);
-    console.log(`dayOfWeek:${dayOfWeek}, month:${month}, time:${time}`);
+
 
     /**
      * Gametime info doesnt require extra request right now, its in event info, add it to the productions
@@ -41,26 +41,50 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
         productions.push(gametimeProd);
     };
 
+
+    /**
+     * StubHub info doesnt require extra request right now, its in event info, add it to the productions
+     * if its there
+     * @param productions
+     */
+
+    const appendStubHub = (productions: Production[]) => {
+        console.log(productions);
+        const stubhub = eventInfo.vendors
+            .find(vendor => vendor.vendor.name === 'stub_hub');
+        if(!stubhub){
+            return;
+        }
+        const stubHubProd:Production={
+            minPrice:stubhub.minPrice,
+            priceWithFees:stubhub.priceWithFees,
+            displayName:stubhub.vendor.displayName,
+            vendorName:stubhub.vendor.name
+        }
+        productions.push(stubHubProd);
+    };
+
     /**
      * Only issue request if accordion is opened.
      * The request gets all the prices for a given event for each vendor
      */
     const onAccordionTriggerClickedHandler = async () => {
 
-        if (isOpen) {
-            console.log('Was open no action taken');
-            setIsOpen(!isOpen);
-            return;
-        }
-        setIsOpen(!isOpen);
-        setLoadingPrices(true);
-        console.log('Making request for prices..');
-        const vendors = eventInfo.vendors.filter(event => event.productionID !== -1);
-        const productions = await APIService.getEventPrices(vendors);
-        appendGametime(productions);
-        setProductions(productions);
-        setLoadingPrices(false);
-
+        // if (isOpen) {
+        //     console.log('Was open no action taken');
+        //     setIsOpen(!isOpen);
+        //     return;
+        // }
+        // setIsOpen(!isOpen);
+        // setLoadingPrices(true);
+        // console.log('Making request for prices..');
+        // const vendors = eventInfo.vendors.filter(event => event.productionID !== -1);
+        // const productions = await APIService.getEventPrices(vendors);
+        // appendGametime(productions);
+        // appendStubHub(productions);
+        // setProductions(productions);
+        // setLoadingPrices(false);
+        //
     };
 
     /**
@@ -101,13 +125,12 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                                 size={50}/>
                         </AccordionContent> :
                         <AccordionContent className="flex flex-col gap-1 ">
-                            {productions.map((production, idx) => {
+                            {eventInfo.vendors.map((vendor, idx) => {
                                 return (<Vendor
                                     key={idx}
-                                    productionDetails={production}
                                     includeFees={includeFees}
-                                    productionURL={eventInfo.vendors
-                                        .find(e => e.vendor.name == production.vendorName)?.url ?? 'Test'}/>); //TODO this has to be better
+                                    vendor={vendor}
+                                    />);
                             })}
                         </AccordionContent>
 

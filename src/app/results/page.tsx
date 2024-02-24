@@ -15,6 +15,11 @@ interface Params {
 
 export default async function SearchResultsPage(props: PageProps) {
     const eventsResult = await APIService.getPerformerEvents(props.searchParams.performer);
+    // Object.values(eventsResult.events).forEach(e=>{
+    //     if(e.venue.name.startsWith('Red')){
+    //         console.log(e);
+    //     }
+    // })
 
     return (
         <div>

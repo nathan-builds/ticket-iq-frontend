@@ -1,11 +1,5 @@
-import { resolveIcon } from 'next/dist/lib/metadata/resolvers/resolve-icons';
-import { Event } from '@/components/event';
-import seatGeekIcon from '@/images/vendors/seat_geek.jpg';
-import vividSeatsIcon from '@/images/vendors/vivid_seats.jpg';
-import gametimeIcon from '@/images/vendors/gametime.jpg';
-import { StaticImageData } from 'next/image';
 
-export type NumMap<V> = { [index: number]: V }
+import { StaticImageData } from 'next/image';
 
 export type TicketMasterSearchResponse = {
     _embedded: {
@@ -26,7 +20,7 @@ export type Image = {
 
 export type EventsMap = { [index: string]: TicketIQEvent }
 
-export type VendorName = 'seat_geek' | 'gametime' | 'vivid_seats'
+export type VendorName = 'seat_geek' | 'gametime' | 'vivid_seats'|'stub_hub'
 
 export type Vendor = {
     name: VendorName,
@@ -78,13 +72,6 @@ export type Venue = {
 export type ImageMap = {
     [index in VendorName]: StaticImageData;
 };
-
-export const VendorImages: ImageMap = {
-    seat_geek: seatGeekIcon,
-    vivid_seats: vividSeatsIcon,
-    gametime: gametimeIcon
-};
-
 
 export type Category = {
     title: string,
