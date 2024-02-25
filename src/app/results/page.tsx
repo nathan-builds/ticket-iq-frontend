@@ -2,6 +2,7 @@ import { NavbarResults } from '@/components/navbar-results';
 import { APIService } from '@/services/apiService';
 import React from 'react';
 import SearchResults from '@/components/search-results';
+import { cookies } from 'next/headers';
 
 
 interface PageProps {
@@ -14,6 +15,8 @@ interface Params {
 }
 
 export default async function SearchResultsPage(props: PageProps) {
+    //attempt to disable cache
+    const _ = cookies()
     const eventsResult = await APIService.getPerformerEvents(props.searchParams.performer);
     // Object.values(eventsResult.events).forEach(e=>{
     //     if(e.venue.name.startsWith('Red')){
