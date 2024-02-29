@@ -25,7 +25,7 @@ export class APIService {
     static getPerformerEvents = async (performer: string): Promise<EventsResult> => {
 
         let performerFormatted = performer.replaceAll(' ', '+');
-        const res = await fetch(`${APIService.baseURL}/events/find?performer=${performerFormatted}`, {
+        const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performerFormatted}`, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
         const json = await res.json();

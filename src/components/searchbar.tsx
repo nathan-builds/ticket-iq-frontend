@@ -29,6 +29,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
     const [backgroundColor, setBackgroundColor] = useState('#ffffff');
     const router = useRouter();
 
+
     /**
      * For the images, sort and find the smallest width
      * @param keyword
@@ -70,7 +71,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
     };
 
     const onSearchItemSelect = (item: SearchItem) => {
-        if (!item) {
+        if (!item || item.id === -1) {
             return;
         }
         const performerName = item.name.replaceAll(' ', '+');
@@ -87,9 +88,9 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
             height: `${props.height}px`,
             borderRadius: `${props.borderRadius}px`,
             placeholderColor: '#000000',
-            iconColor: '#15AB99'
+            iconColor: '#15AB99',
         }} placeholder={'Find Performer'} className="search" onSearch={onUserSearch}
-                                             formatResult={formatResult} onSelect={onSearchItemSelect}>
+                                             formatResult={formatResult} onSelect={onSearchItemSelect} autoFocus={true}>
         </ReactSearchAutocomplete>
     </div>);
 };
