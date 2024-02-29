@@ -1,6 +1,8 @@
 
 import { StaticImageData } from 'next/image';
 
+export type Map<T>={[index:string]:T};
+
 export type TicketMasterSearchResponse = {
     _embedded: {
         attractions: Attraction[]

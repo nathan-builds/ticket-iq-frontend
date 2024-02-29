@@ -22,9 +22,9 @@ export default function RootLayout({
             <link rel="icon" href="/favicon.ico" sizes="any"/>
             <link
                 rel="icon"
-                href="/icon.png"
+                href="/src/app/icon.JPG"
                 type="image/<generated>"
-                sizes="<generated>"
+                sizes="any"
             />
         </head>
         <body className={inter.className}>{children}</body>
