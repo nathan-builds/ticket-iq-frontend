@@ -52,15 +52,15 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
         console.log(productions);
         const stubhub = eventInfo.vendors
             .find(vendor => vendor.vendor.name === 'stub_hub');
-        if(!stubhub){
+        if (!stubhub) {
             return;
         }
-        const stubHubProd:Production={
-            minPrice:stubhub.minPrice,
-            priceWithFees:stubhub.priceWithFees,
-            displayName:stubhub.vendor.displayName,
-            vendorName:stubhub.vendor.name
-        }
+        const stubHubProd: Production = {
+            minPrice: stubhub.minPrice,
+            priceWithFees: stubhub.priceWithFees,
+            displayName: stubhub.vendor.displayName,
+            vendorName: stubhub.vendor.name
+        };
         productions.push(stubHubProd);
     };
 
@@ -69,15 +69,22 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
      * The request gets all the prices for a given event for each vendor
      */
     const onAccordionTriggerClickedHandler = async () => {
-        // const stubHubEvent= eventInfo.vendors.find(e=>e.vendor.name==='stub_hub');
-        // if(stubHubEvent){
-        //     const data = await APIService.getStubHubEventPrice(stubHubEvent.url);
-        // }
-        // if (isOpen) {
-        //     console.log('Was open no action taken');
-        //     setIsOpen(!isOpen);
-        //     return;
-        // }
+
+        if (isOpen) {
+            setIsOpen(!isOpen);
+            return;
+        }
+        setIsOpen(true);
+        const stubHubEvent = eventInfo.vendors.find(e => e.vendor.name === 'stub_hub');
+        if (stubHubEvent) {
+            setLoadingPrices(true);
+            const data = await APIService.getStubHubPrice(stubHubEvent.url);
+            stubHubEvent.minPrice = data.minPrice;
+            stubHubEvent.priceWithFees = data.priceWithFees;
+            console.log(data);
+            setLoadingPrices(false);
+        }
+
         // setIsOpen(!isOpen);
         // setLoadingPrices(true);
         // console.log('Making request for prices..');
@@ -133,7 +140,7 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                                     key={idx}
                                     includeFees={includeFees}
                                     vendor={vendor}
-                                    />);
+                                />);
                             })}
                         </AccordionContent>
 

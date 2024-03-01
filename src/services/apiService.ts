@@ -37,6 +37,12 @@ export class APIService {
         };
     };
 
+    static getStubHubPrice=async(longFormURL:string):Promise<{ minPrice: number, priceWithFees: number }>=>{
+        const test =longFormURL.substring(longFormURL.indexOf('destination:')+35);
+        const res = await fetch(`${APIService.baseURL}/productions/stubhub?eventURL=${test}`)
+        const json=await res.json();
+        return json;
+    }
 
 
     /**
