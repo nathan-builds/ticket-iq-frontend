@@ -69,7 +69,10 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
      * The request gets all the prices for a given event for each vendor
      */
     const onAccordionTriggerClickedHandler = async () => {
-
+        const stubHubEvent= eventInfo.vendors.find(e=>e.vendor.name==='stub_hub');
+        if(stubHubEvent){
+            const data = await APIService.getStubHubEventPrice(stubHubEvent.url);
+        }
         // if (isOpen) {
         //     console.log('Was open no action taken');
         //     setIsOpen(!isOpen);

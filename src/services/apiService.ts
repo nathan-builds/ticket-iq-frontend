@@ -1,5 +1,5 @@
 import { Category, EventsMap, EventsResult, Production, Productions, VendorPartial } from '@/utils/models';
-
+import { parse } from 'node-html-parser';
 export class APIService {
      static baseURL = 'https://ticket-iq-production.up.railway.app';
     // static baseURL = 'http://localhost:7000';
@@ -36,6 +36,27 @@ export class APIService {
             events: json['events']
         };
     };
+
+
+    static getStubHubEventPrice=async(eventURL:string):Promise<string>=>{
+        try {
+            const sub = eventURL.substring(eventURL.indexOf('destination:') + 12)
+            console.log(sub);
+            console.log(eventURL)
+            const res = await fetch(sub);
+            const data = await res.text();
+            const root = parse(data);
+            const obj = root.getElementById('index-data');
+            if (obj?.rawText) {
+                const json = JSON.parse(obj?.rawText);
+                console.log(json);
+            }
+        }
+        catch (e){
+            console.log(e);
+        }
+        return 'Test';
+    }
 
     /**
      * Build a request string in th format of /vendors=sg:123456+vs:565423 each vendor short name
