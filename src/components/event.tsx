@@ -6,6 +6,7 @@ import { utcToESTDayMonthTime } from '@/utils/utils';
 import { PuffLoader } from 'react-spinners';
 import { APIService } from '@/services/apiService';
 import { Vendor } from '@/components/vendor';
+import { StubHubVendor } from '@/components/stub-hub-vendor';
 
 
 export interface EventProps {
@@ -16,7 +17,6 @@ export interface EventProps {
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
     const { dayOfWeek, month, time, day } = utcToESTDayMonthTime(eventInfo.datetime_utc);
     const [loadingPrices, setLoadingPrices] = useState(false);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [productions, setProductions] = useState<Production[]>([]);
 
 
@@ -70,20 +70,20 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
      */
     const onAccordionTriggerClickedHandler = async () => {
 
-        if (isOpen) {
-            setIsOpen(!isOpen);
-            return;
-        }
-        setIsOpen(true);
-        const stubHubEvent = eventInfo.vendors.find(e => e.vendor.name === 'stub_hub');
-        if (stubHubEvent) {
-            setLoadingPrices(true);
-            const data = await APIService.getStubHubPrice(stubHubEvent.url);
-            stubHubEvent.minPrice = data.minPrice;
-            stubHubEvent.priceWithFees = data.priceWithFees;
-            console.log(data);
-            setLoadingPrices(false);
-        }
+        // if (isOpen) {
+        //     setIsOpen(!isOpen);
+        //     return;
+        // }
+        // setIsOpen(true);
+        // const stubHubEvent = eventInfo.vendors.find(e => e.vendor.name === 'stub_hub');
+        // if (stubHubEvent) {
+        //     setLoadingPrices(true);
+        //     const data = await APIService.getStubHubPrice(stubHubEvent.url);
+        //     stubHubEvent.minPrice = data.minPrice;
+        //     stubHubEvent.priceWithFees = data.priceWithFees;
+        //     console.log(data);
+        //     setLoadingPrices(false);
+        // }
 
         // setIsOpen(!isOpen);
         // setLoadingPrices(true);
@@ -104,7 +104,7 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
         <div>
             <Accordion type="single" collapsible className="min-w-[350px] w-full ">
                 <AccordionItem value="item-1">
-                    <AccordionTrigger onClick={onAccordionTriggerClickedHandler}>
+                    <AccordionTrigger >
                         <div className="flex ">
                             <div className="w-[110px] flex flex-col items-start md:w-[150px] gap-1">
                                 <span className="font-bold text-md">{`${month} ${day}`}</span>
@@ -134,14 +134,15 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                             <PuffLoader
                                 size={50}/>
                         </AccordionContent> :
+                        //using stub hub separate temp component for now
                         <AccordionContent className="flex flex-col gap-1 ">
-                            {eventInfo.vendors.map((vendor, idx) => {
-                                return (<Vendor
-                                    key={idx}
-                                    includeFees={includeFees}
-                                    vendor={vendor}
-                                />);
-                            })}
+                            {eventInfo.vendors
+                                .map((vendor, idx) => {
+                                    return (vendor.vendor.name === 'stub_hub' ?
+                                        <StubHubVendor key={idx} vendor={vendor} includeFees={includeFees}/> :
+                                        <Vendor key={idx} vendor={vendor} includeFees={includeFees}/>);
+                                })}
+                            {/*{stubHubEvent? <StubHubVendor vendor={stubHubEvent} includeFees={includeFees}/>:<div/>}*/}
                         </AccordionContent>
 
                     }

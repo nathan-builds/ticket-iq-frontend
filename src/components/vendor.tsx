@@ -10,7 +10,6 @@ export interface VendorProps {
 }
 
 export const Vendor: React.FC<VendorProps> = ({ vendor, includeFees }) => {
-
     return (
         <a className=" flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] " href={vendor.url} target={'_blank'}>
             {/*<Image src={vendorIcon} alt={''}*/}
