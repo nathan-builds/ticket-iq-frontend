@@ -5,7 +5,7 @@ import ResultsFilter, { Sort, SortType } from '@/components/results-filter';
 import { TicketIqEvents } from '@/components/ticket-iq-events';
 import React, { useState } from 'react';
 import { TicketIQEvent } from '@/utils/models';
-import { CityFilter } from '@/components/city-filter';
+import { CityFilter, NO_CITY_FILTER } from '@/components/city-filter';
 import { getListOfUniqueLocations } from '@/utils/utils';
 
 interface SearchResultsProps {
@@ -18,9 +18,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
     //default filter is just by date
     const [sortType, setSortType] = useState<SortType>('date');
     const [includeFees, setIncludeFees] = useState(false);
-    const [cityFilter, setCityFilter] = useState<string>('');
+    const [cityFilter, setCityFilter] = useState<string>(NO_CITY_FILTER);
     const eventLocations = getListOfUniqueLocations(events);
-
 
     const onFilterSelectionChangeHandler = (filter: SortType) => {
         setSortType(filter);
@@ -45,7 +44,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
                     </div>
                     <div className='flex gap-1'>
                         <ResultsFilter filterChanged={onFilterSelectionChangeHandler}/>
-                        <CityFilter alertUserCityChange={onEventCityFilterChangeHandler} items={eventLocations}/>
+                        <CityFilter  alertUserCityChange={onEventCityFilterChangeHandler} items={eventLocations}/>
                     </div>
                 </div>
                 <span className="font-bold text-2xl md:text-xl">Upcoming Events</span>

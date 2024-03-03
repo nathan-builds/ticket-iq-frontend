@@ -3,6 +3,7 @@ import { APIService } from '@/services/apiService';
 import React from 'react';
 import SearchResults from '@/components/search-results';
 import { cookies } from 'next/headers';
+import { useRouter } from 'next/navigation';
 
 
 interface PageProps {

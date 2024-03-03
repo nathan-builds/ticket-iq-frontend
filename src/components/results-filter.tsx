@@ -35,6 +35,8 @@ const ResultsFilter: React.FC<ResultsFilterProps> = (props) => {
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState('');
 
+
+
     /**
      * If the current value is the same do nothing. If the value is different, set the new value
      * and alert the user that the filter has changed so that necessary components get the updated value
