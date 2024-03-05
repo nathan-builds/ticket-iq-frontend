@@ -104,3 +104,12 @@ export type TicketMasterImage = {
     height: string,
     fallback: boolean
 }
+
+export type SeatGeekAutoCompleteResponse={
+    performers:[
+        {
+            type:string,
+            name:string,
+        }
+    ]
+}
