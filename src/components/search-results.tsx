@@ -48,6 +48,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
                     </div>
                 </div>
                 <span className="font-bold text-2xl md:text-xl">Upcoming Events</span>
+
             </div>
             {events.length === 0 ?
                 <div className="self-center pt-28 text-2xl font-bold italic">
