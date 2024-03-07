@@ -24,7 +24,6 @@ export class APIService {
      * @param performer in form of Luke Combs
      */
     static getPerformerEvents = async (performer: string): Promise<EventsResult> => {
-
         let performerFormatted = performer.replaceAll(' ', '+');
         const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performerFormatted}`, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
@@ -38,12 +37,12 @@ export class APIService {
         };
     };
 
-    static getStubHubPrice = async (longFormURL: string, includeFees: boolean): Promise<{
+    static getStubHubPrice = async (longFormURL: string): Promise<{
         minPrice: number,
         priceWithFees: number
     }> => {
         const test = longFormURL.substring(longFormURL.indexOf('destination:') + 35);
-        const res = await fetch(`${APIService.baseURL}/productions/stubhub?eventURL=${test}&includeFees=${includeFees}`);
+        const res = await fetch(`${APIService.baseURL}/productions/stubhub?eventURL=${test}`);
         const json = await res.json();
         return json;
     };

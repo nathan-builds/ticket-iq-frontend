@@ -28,7 +28,7 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
     useEffect(() => {
         async function getStubHubPrice() {
             setIsLoading(true);
-            const data = await APIService.getStubHubPrice(vendor.url, includeFees);
+            const data = await APIService.getStubHubPrice(vendor.url);
             setPrice(data);
             setIsLoading(false);
         }
