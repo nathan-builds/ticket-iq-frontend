@@ -23,6 +23,9 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
         useState<{ minPrice: number, priceWithFees: number }>();
     const [loading, setIsLoading] = useState<boolean>(true);
 
+    const logClickThrough = () => {
+        APIService.logVendorSiteClickThrough(vendor.vendor.name);
+    };
 
 
     useEffect(() => {
@@ -32,11 +35,14 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
             setPrice(data);
             setIsLoading(false);
         }
+
         getStubHubPrice();
     }, []);
 
     return (
-        <a className="justify-between flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] " href={vendor.url}
+        <a className="justify-between flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] "
+           onClick={logClickThrough}
+           href={vendor.url}
            target={'_blank'}>
             <div className="pl-2 flex items-start md:w-[150px]">{vendor.vendor.displayName}</div>
             {loading ?

@@ -77,4 +77,28 @@ export class APIService {
         return json['productions'];
     };
 
+
+    static logVendorSiteClickThrough = async (site: string) => {
+        const data = {
+            siteName: site
+        };
+
+        const url = `${APIService.baseURL}/log/site`;
+        try {
+            console.log(`Data is `, data);
+            console.log(url);
+            const res = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({ siteName: site }),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+
+        } catch (e) {
+            console.log('Could not perform log post.');
+        }
+
+    };
+
+
 }
