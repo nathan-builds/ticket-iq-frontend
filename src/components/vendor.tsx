@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Production,VendorPartial } from '@/utils/models';
+import pino ,{Logger} from 'pino';
 
 export interface VendorProps {
     // productionURL: string,
@@ -10,8 +11,13 @@ export interface VendorProps {
 }
 
 export const Vendor: React.FC<VendorProps> = ({ vendor, includeFees }) => {
+   const logger = pino();
+   const logClickThrough=()=>{
+       logger.info(`${vendor.vendor.name} was clicked through`);
+   }
+
     return (
-        <a className=" flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] " href={vendor.url} target={'_blank'}>
+        <a className=" flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] " href={vendor.url} target={'_blank'} onClick={logClickThrough }>
             {/*<Image src={vendorIcon} alt={''}*/}
             {/*       className=" w-[32px] h-[32px] lg:w-[64px] lg:h-[50px] rounded-md "></Image>*/}
             <div></div>

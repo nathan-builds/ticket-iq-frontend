@@ -22,11 +22,12 @@ export const NavCategories = () => {
                     dropdownItems={ArtistNames}
                     description={'Trending Artists'}/>
             </div>
-            <div className="text-lg  md:flex">
+            <div className="text-lg  md:flex"  >
                 <NavDropdown title={'Comedians'}
                              itemSelected={onNavItemSelected}
                              dropdownItems={COMEDIANS}
                              description={'Trending Comedians'}
+
                 />
             </div>
             <div className="text-lg">
