@@ -1,10 +1,8 @@
 'use client';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { ChangeEvent, KeyboardEventHandler, useEffect, useRef, useState } from 'react';
-import { SeatGeekAutoCompleteResponse, TicketMasterSearchResponse } from '@/utils/models';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { Map, SeatGeekAutoCompleteResponse, TicketMasterSearchResponse } from '@/utils/models';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 
 const apiKey = 'p5Da9bnXsBrs5a00fJw8oTJM9GSffNDw';
@@ -26,17 +24,40 @@ interface SearchItem {
 
 export const Searchbar: React.FC<SearchBarProps> = (props) => {
 
-    const [searchItems, setSearchItems] = useState<SearchItem[]>([]);
-    const [backgroundColor, setBackgroundColor] = useState('#ffffff');
+    const [searchItems, setSearchItems] = useState<Map<SearchItem>>({});
+    const [nextItemID, setNextItemID] = useState(0);
     const router = useRouter();
 
+    useEffect(() => {
+        addEnterKeyListener();
+    }, []);
 
 
     /**
-     * For the images, sort and find the smallest width
+     * This key listener is responsible for handling when the enter key is pressed to use whatever text
+     * is in the searchbar at the time.
+     */
+    const addEnterKeyListener = () => {
+        const element: HTMLInputElement = document.querySelector('[data-test="search-input"]') as HTMLInputElement;
+        element?.addEventListener('keydown', (evt) => {
+            const keyEvent = evt as KeyboardEvent;
+            if (keyEvent.key === 'Enter') {
+                //set id, it doesn't matter here
+                onSearchItemSelect({
+                    id: 1,
+                    name: element?.value
+                },true);
+            }
+        });
+    };
+
+
+    /**
+     * NOT USING TM right now
+     * For the images, sort and find the smallest width.
      * @param keyword
      */
-    const onUserSearch = async (keyword: string) => {
+    const onUserSearchTicketMaster = async (keyword: string) => {
         const url = URL.replace('$SEARCH_STRING$', keyword);
         if (isLive) {
             fetch(url)
@@ -52,59 +73,76 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
                             name: item.name
                         };
                     });
-                    setSearchItems(items);
+                    // setSearchItems(items);
                 });
         } else {
             console.log('Search bar not live...');
         }
     };
 
+    /**
+     *Uses SeatGeek API to find suggested performers based on keyword. Additional logic was required here
+     * Sometimes the APU returns empty performers for no reason. This function keeps track of all items that have
+     * been searched since user started typing. As suggested items are received from the API only add it to the items
+     * map IF it is not already in it. Use the nextID as the unique ID needed by the search bar.
+     * @param keyword the string being searched
+     */
     const onUserSearchSeatGeek = async (keyword: string): Promise<void> => {
         const url = seatGeekURL.replace('$SEARCH_STRING$', keyword);
         fetch(url)
             .then(res => res.json())
             .then(json => {
                 let data = json as SeatGeekAutoCompleteResponse;
-                let id = 0;
-                const items: SearchItem[] = data?.performers?.map(performer => {
+                let id = nextItemID;
+                const newItems: Map<SearchItem> = {};
+
+                for (let performer of data?.performers) {
+                    //we already have this item in the search
+                    if (searchItems[performer.name]) {
+                        continue;
+                    }
                     id += 1;
-                    return {
+                    newItems[performer.name] = {
                         name: performer.name,
                         id: id
                     };
+                }
+                //sets next ID to be used on the next batch of items being suggested
+                setNextItemID(id + 1);
+                setSearchItems(prev => {
+                    return {
+                        ...prev,
+                        ...newItems
+                    };
                 });
-                setSearchItems(items);
-            });
+            }).catch(err => {
+            console.log('Error with search bar');
+        });
     };
 
 
     const formatResult = (item: SearchItem) => {
         return (
             <div className="flex gap-10 text-xl items-center">
-                {/*<div className="relative h-[48px] w-[48px]">*/}
-                {/*    <Image src={item.image} alt={''} fill*/}
-                {/*           className="border-1 rounded-lg"/>*/}
-                {/*</div>*/}
                 <div>{item.name}</div>
             </div>
         );
     };
 
-    const onSearchItemSelect = (item: SearchItem) => {
+    const onSearchItemSelect = (item: SearchItem, isManuallyEnteredSearch?:boolean) => {
         if (!item || item.id === -1) {
             return;
         }
         const performerName = item.name.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}`);
+        router.push(`/results?performer=${performerName}&isStrSearch=${isManuallyEnteredSearch?'true':'false'}`);
 
     };
 
 
-
-    return (<div >
+    return (<div>
         <ReactSearchAutocomplete<SearchItem>
 
-            items={searchItems}
+            items={Object.values(searchItems)}
             styling={{
                 backgroundColor: '#ffffff',
                 color: '#000000',
@@ -120,7 +158,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
             formatResult={formatResult}
             onSelect={onSearchItemSelect}
             autoFocus={true}
-            inputDebounce={175}
+            inputDebounce={200}
             maxResults={5}
         >
         </ReactSearchAutocomplete>

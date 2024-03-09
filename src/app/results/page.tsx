@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 interface PageProps {
     params: Params,
-    searchParams: { performer: string }
+    searchParams: { performer: string, isStrSearch: boolean }
 }
 
 interface Params {
@@ -17,14 +17,11 @@ interface Params {
 
 export default async function SearchResultsPage(props: PageProps) {
     //attempt to disable cache
-    const _ = cookies()
-    const eventsResult = await APIService.getPerformerEvents(props.searchParams.performer);
-    // Object.values(eventsResult.events).forEach(e=>{
-    //     if(e.venue.name.startsWith('Red')){
-    //         console.log(e);
-    //     }
-    // })
-
+    const _ = cookies();
+    const eventsResult = await APIService.getPerformerEvents(
+        props.searchParams.performer,
+        props.searchParams.isStrSearch
+    );
     return (
         <div>
             <NavbarResults></NavbarResults>
