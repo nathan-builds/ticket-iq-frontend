@@ -110,6 +110,7 @@ export type SeatGeekAutoCompleteResponse={
         {
             type:string,
             name:string,
+            slug:string
         }
     ]
 }

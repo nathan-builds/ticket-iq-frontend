@@ -16,8 +16,10 @@ export interface SearchBarProps {
     borderRadius: number,
 }
 
+//slug is SeatGeeks URL friendly name
 interface SearchItem {
     id: number,
+    slug?: string,
     name: string,
 }
 
@@ -46,39 +48,39 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
                 onSearchItemSelect({
                     id: 1,
                     name: element?.value
-                },true);
+                }, true);
             }
         });
     };
 
 
-    /**
-     * NOT USING TM right now
-     * For the images, sort and find the smallest width.
-     * @param keyword
-     */
-    const onUserSearchTicketMaster = async (keyword: string) => {
-        const url = URL.replace('$SEARCH_STRING$', keyword);
-        if (isLive) {
-            fetch(url)
-                .then(res => res.json())
-                .then(json => {
-                    let data = json as TicketMasterSearchResponse;
-                    let id = 0;
-
-                    const items: SearchItem[] = data._embedded?.attractions?.map(item => {
-                        id += 1;
-                        return {
-                            id: id,
-                            name: item.name
-                        };
-                    });
-                    // setSearchItems(items);
-                });
-        } else {
-            console.log('Search bar not live...');
-        }
-    };
+    // /**
+    //  * NOT USING TM right now
+    //  * For the images, sort and find the smallest width.
+    //  * @param keyword
+    //  */
+    // const onUserSearchTicketMaster = async (keyword: string) => {
+    //     const url = URL.replace('$SEARCH_STRING$', keyword);
+    //     if (isLive) {
+    //         fetch(url)
+    //             .then(res => res.json())
+    //             .then(json => {
+    //                 let data = json as TicketMasterSearchResponse;
+    //                 let id = 0;
+    //
+    //                 const items: SearchItem[] = data._embedded?.attractions?.map(item => {
+    //                     id += 1;
+    //                     return {
+    //                         id: id,
+    //                         name: item.name
+    //                     };
+    //                 });
+    //                 // setSearchItems(items);
+    //             });
+    //     } else {
+    //         console.log('Search bar not live...');
+    //     }
+    // };
 
     /**
      *Uses SeatGeek API to find suggested performers based on keyword. Additional logic was required here
@@ -104,6 +106,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
                     id += 1;
                     newItems[performer.name] = {
                         name: performer.name,
+                        slug: performer.slug,
                         id: id
                     };
                 }
@@ -129,12 +132,18 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
         );
     };
 
-    const onSearchItemSelect = (item: SearchItem, isManuallyEnteredSearch?:boolean) => {
+    /**
+     * Two paths to this. If the user selected one of the entries from autosearch then there is a slug. If the user
+     * manually entered a string, there is no slug. Build the URL based on this.
+     * @param item
+     * @param isManuallyEnteredSearch
+     */
+    const onSearchItemSelect = (item: SearchItem, isManuallyEnteredSearch?: boolean) => {
         if (!item || item.id === -1) {
             return;
         }
         const performerName = item.name.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}&isStrSearch=${isManuallyEnteredSearch?'true':'false'}`);
+        router.push(`/results?performer=${performerName}${item.slug ? `slug=${item.slug}` : ''}`);
 
     };
 

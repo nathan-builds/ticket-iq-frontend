@@ -22,11 +22,11 @@ export class APIService {
      * Convert the string to the correct format by replacing spaces. Then make a request to the
      * backend for all the given events for a performer
      * @param performer in form of Luke Combs
-     * @param isStrSearch was this manually typed, or did someone select an item from the search
+     * @param slug there will be a slug if the item was selected and not manually typed
      */
-    static getPerformerEvents = async (performer: string, isStrSearch:boolean): Promise<EventsResult> => {
+    static getPerformerEvents = async (performer: string, slug: string | undefined): Promise<EventsResult> => {
         let performerFormatted = performer.replaceAll(' ', '+');
-        const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performerFormatted}&isStrSearch=${isStrSearch}`, {
+        const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performerFormatted}${slug ? `&slug=${slug}` : ''} `, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
         const json = await res.json();

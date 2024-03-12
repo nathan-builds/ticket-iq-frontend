@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 interface PageProps {
     params: Params,
-    searchParams: { performer: string, isStrSearch: boolean }
+    searchParams: { performer: string, slug?:string }
 }
 
 interface Params {
@@ -20,7 +20,7 @@ export default async function SearchResultsPage(props: PageProps) {
     const _ = cookies();
     const eventsResult = await APIService.getPerformerEvents(
         props.searchParams.performer,
-        props.searchParams.isStrSearch
+        props.searchParams.slug
     );
     return (
         <div>
