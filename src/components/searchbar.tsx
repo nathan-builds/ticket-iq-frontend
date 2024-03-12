@@ -143,7 +143,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
             return;
         }
         const performerName = item.name.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}${item.slug ? `slug=${item.slug}` : ''}`);
+        router.push(`/results?performer=${performerName}${item.slug ? `&slug=${item.slug}` : ''}`);
 
     };
 
