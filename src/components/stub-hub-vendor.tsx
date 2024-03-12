@@ -4,6 +4,7 @@ import { VendorPartial } from '@/utils/models';
 import React, { useEffect, useState } from 'react';
 import { APIService } from '@/services/apiService';
 import { PuffLoader } from 'react-spinners';
+import { Button } from '@/components/ui/button';
 
 
 export interface VendorProps {
@@ -40,16 +41,17 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
     }, []);
 
     return (
-        <a className="justify-between flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] "
+        <a className="justify-between flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] h-[35px] "
            onClick={logClickThrough}
            href={vendor.url}
            target={'_blank'}>
             <div className="pl-2 flex items-start md:w-[150px]">{vendor.vendor.displayName}</div>
             {loading ?
                 <PuffLoader size={30} className="mr-1"/> :
-                <div
-                    className="ml-auto pr-1">{`\$${includeFees ? price?.priceWithFees : price?.minPrice}`}
-                </div>
+                <Button className="ml-auto w-[70px] mr-3 h-3/4" onClick={logClickThrough}>
+                    {`\$${includeFees ? vendor.priceWithFees : vendor.minPrice}`}
+                </Button>
+
             }
 
         </a>
