@@ -41,7 +41,7 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
     }, []);
 
     return (
-        <a className="justify-between flex font-bold text-md lg:text-lg hover:bg-[#D9DCE1] h-[35px] "
+        <a className="justify-between flex items-center font-bold text-md lg:text-lg hover:bg-[#D9DCE1] h-[35px] "
            onClick={logClickThrough}
            href={vendor.url}
            target={'_blank'}>
