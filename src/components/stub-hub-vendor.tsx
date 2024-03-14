@@ -23,7 +23,6 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
     const [price, setPrice] =
         useState<{ minPrice: number, priceWithFees: number }>();
     const [loading, setIsLoading] = useState<boolean>(true);
-
     const logClickThrough = () => {
         APIService.logVendorSiteClickThrough(vendor.vendor.name);
     };
@@ -33,6 +32,7 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
         async function getStubHubPrice() {
             setIsLoading(true);
             const data = await APIService.getStubHubPrice(vendor.url);
+        console.log(data);
             setPrice(data);
             setIsLoading(false);
         }
@@ -49,7 +49,8 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
             {loading ?
                 <PuffLoader size={30} className="mr-1"/> :
                 <Button className="ml-auto w-[70px] mr-3 h-3/4" onClick={logClickThrough}>
-                    {`\$${includeFees ? vendor.priceWithFees : vendor.minPrice}`}
+                    {`\$${includeFees ? price?.priceWithFees : vendor.minPrice}`}
+
                 </Button>
 
             }
