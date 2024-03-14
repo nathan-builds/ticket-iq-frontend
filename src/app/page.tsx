@@ -14,8 +14,8 @@ export default async function Home() {
             <TempAlert/>
             <Navbar/>
             <div className="flex flex-col items-center my-20">
-                <div className="font-semibold text-xl md:text-3xl mb-10" >
-                    A better way to find tickets.
+                <div className="font-semibold text-xl md:text-3xl mb-10">
+                    Compare tickets, save money.
                 </div>
                 <div className="w-11/12 lg:w-1/2">
                     <Searchbar color={'#15AB99'} borderRadius={15} height={55}/>
