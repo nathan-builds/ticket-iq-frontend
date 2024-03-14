@@ -23,7 +23,6 @@ export interface NavDropdownProps {
  */
 export const NavDropdown: React.FC<NavDropdownProps> = ({ title, itemSelected, dropdownItems, description }) => {
     const onItemClick = (e: any) => {
-        console.log(e.target.innerText);
         itemSelected(e.target.innerText);
     };
     return (

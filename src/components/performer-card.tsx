@@ -18,10 +18,11 @@ export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
     const venue = props.desc.venue;
     const router = useRouter();
 
+    //todo fix this so that its only done in one spot maybe?
     const onPerformerClickedHandler=()=>{
         const performerName = props.title.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}`);
-
+        const slug=props.title.replaceAll(' ','-').toLowerCase();
+        router.push(`/results?performer=${performerName}&slug=${slug}`);
     }
 
     return (

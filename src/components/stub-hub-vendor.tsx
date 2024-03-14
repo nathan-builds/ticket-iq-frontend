@@ -49,7 +49,7 @@ export const StubHubVendor: React.FC<VendorProps> = ({ vendor, includeFees }) =>
             {loading ?
                 <PuffLoader size={30} className="mr-1"/> :
                 <Button className="ml-auto w-[70px] mr-3 h-3/4" onClick={logClickThrough}>
-                    {`\$${includeFees ? price?.priceWithFees : vendor.minPrice}`}
+                    {`\$${includeFees ? price?.priceWithFees : price?.minPrice}`}
 
                 </Button>
 

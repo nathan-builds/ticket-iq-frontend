@@ -9,12 +9,12 @@ export const NavCategories = () => {
 
     const onNavItemSelected = (pName: string) => {
         const performerName = pName.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}`);
-
+        const slug = pName.replaceAll(' ', '-');
+        router.push(`/results?performer=${performerName}&slug=${slug}`);
     };
 
     return (
-        <div className='flex gap-5 lg:gap-10'>
+        <div className="flex gap-5 lg:gap-10">
             <div className="text-lg  md:flex">
                 <NavDropdown
                     title={'Artists'}
@@ -22,7 +22,7 @@ export const NavCategories = () => {
                     dropdownItems={ArtistNames}
                     description={'Trending Artists'}/>
             </div>
-            <div className="text-lg  md:flex"  >
+            <div className="text-lg  md:flex">
                 <NavDropdown title={'Comedians'}
                              itemSelected={onNavItemSelected}
                              dropdownItems={COMEDIANS}
@@ -35,7 +35,7 @@ export const NavCategories = () => {
                     title={'MLB'}
                     itemSelected={onNavItemSelected}
                     dropdownItems={MLB_TEAMS}
-                    description='MLB Teams'
+                    description="MLB Teams"
                 />
             </div>
             <div className="text-lg">
