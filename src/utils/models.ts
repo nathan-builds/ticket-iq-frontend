@@ -57,6 +57,8 @@ export type VendorPartial = Omit<VendorEvent,
 
 export type TicketIQEvent = {
     datetime_utc: string,
+    datetime_local:string,
+    time_tbd:boolean,
     minPrice: number,
     minPriceUrl: string,
     priceWithFees: number,

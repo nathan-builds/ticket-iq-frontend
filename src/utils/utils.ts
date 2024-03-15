@@ -4,10 +4,12 @@ import { TicketIQEvent } from '@/utils/models';
 import { Map } from './models';
 
 /**
- * Convert string to est date, if not marked as 'Z' add it first
+ * Convert string to Month,day, time and day of week. First need to check if there is actually a time,
+ * it could be a TBD if TBD date format is YYYY-MM-DD:::TBD , so for time return a value of TBD
  * @param dateTimeString
+ * @param isTBD whether time is specified or not
  */
-export const utcToESTDayMonthTime = (dateTimeString: string): {
+export const formatLocalTime = (dateTimeString: string, isTBD:boolean): {
     month: string,
     dayOfWeek: string,
     time: string,
@@ -17,14 +19,14 @@ export const utcToESTDayMonthTime = (dateTimeString: string): {
     try {
         //some dates are formatted as 2024-05-25 and some are 2024-05-26T19:00, adding a Z to the first formatted
         //date causes an issues on mobile platforms for some reason, might look into this further at some point
-        if (!dateTimeString.endsWith('Z') && dateTimeString.includes(':')) {
-            dateTimeString += 'Z';
-        }
-        const inputMoment = moment(dateTimeString).tz('America/New_York');
+        // if (!dateTimeString.endsWith('Z') && dateTimeString.includes(':')) {
+        //     dateTimeString += 'Z';
+        // }
+        const inputMoment = moment(dateTimeString);
 
         const month = inputMoment.format('MMM');
         const dayOfWeek = inputMoment.format('ddd');
-        const time = inputMoment.format('h:mm A');
+        const time = isTBD?'TBD':inputMoment.format('h:mm A');
         const day = inputMoment.format('D');
 
         return { month, dayOfWeek, day, time };

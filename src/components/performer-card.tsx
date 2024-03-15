@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image';
 import image1 from '../images/head_heart.jpg';
 import React from 'react';
 import { NextEvent } from '@/utils/models';
-import {  utcToESTDayMonthTime } from '@/utils/utils';
+import {  formatLocalTime } from '@/utils/utils';
 import { useRouter } from 'next/navigation';
 
 export interface PerformerCardProps {
@@ -14,7 +14,8 @@ export interface PerformerCardProps {
 }
 
 export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
-    const { dayOfWeek, month, time,day } = utcToESTDayMonthTime(props.desc?.date);
+    //todo false is just defaulted here for TBD
+    const { dayOfWeek, month, time,day } = formatLocalTime(props.desc?.date,false);
     const venue = props.desc.venue;
     const router = useRouter();
 

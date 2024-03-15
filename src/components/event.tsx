@@ -2,7 +2,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Production, Productions, TicketIQEvent, VendorPartial } from '@/utils/models';
 import React, { useState } from 'react';
-import { utcToESTDayMonthTime } from '@/utils/utils';
+import { formatLocalTime } from '@/utils/utils';
 import { PuffLoader } from 'react-spinners';
 import { APIService } from '@/services/apiService';
 import { Vendor } from '@/components/vendor';
@@ -15,7 +15,7 @@ export interface EventProps {
 }
 
 export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
-    const { dayOfWeek, month, time, day } = utcToESTDayMonthTime(eventInfo.datetime_utc);
+    const { dayOfWeek, month, time, day } = formatLocalTime(eventInfo.datetime_local, eventInfo.time_tbd);
     const [loadingPrices, setLoadingPrices] = useState(false);
     const [productions, setProductions] = useState<Production[]>([]);
 
