@@ -8,7 +8,9 @@ import { TempAlert } from '@/components/temp-alert';
 
 export default async function Home() {
 
+    //test
     const categories = await APIService.getHomeSuggestions();
+
     return (
         <div>
             <TempAlert/>

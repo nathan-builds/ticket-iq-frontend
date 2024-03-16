@@ -34,6 +34,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
         setIncludeFees(!includeFees);
     };
 
+  
+
 
     return (
         <div className="flex flex-col w-full lg:w-1/2  max-w-[900px]">

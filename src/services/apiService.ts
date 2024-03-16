@@ -11,6 +11,9 @@ export class APIService {
      * Make request for all the home page suggestions
      */
     static getHomeSuggestions = async (): Promise<Category[]> => {
+
+
+
         const res = await fetch(`${APIService.baseURL}/home/suggest`, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
