@@ -1,4 +1,5 @@
 import { Category, EventsMap, EventsResult, Production, Productions, VendorPartial } from '@/utils/models';
+import { count } from 'console';
 import { parse } from 'node-html-parser';
 
 export class APIService {
@@ -102,6 +103,33 @@ export class APIService {
         }
 
     };
+
+
+    static testGeoLocation = async (lat:string,lon:string,country:string) => {
+        const data = {
+            lat: lat,
+            lon: lon,
+            country:country
+        };
+
+        const url = `${APIService.baseURL}/test/geo`;
+        try {
+            console.log(`Data is `, data);
+            console.log(url);
+            const res = await fetch(url, {
+                    method: 'POST',
+                body: JSON.stringify({ lat:lat,lon:lon,country:country }),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+
+        } catch (e) {
+            console.log('Could not perform log post.');
+        }
+
+    };
+
+
 
 
 }

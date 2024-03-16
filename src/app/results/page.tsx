@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 interface PageProps {
     params: Params,
-    searchParams: { performer: string, slug?:string }
+    searchParams: { performer: string, slug?:string, lat:string,lon:string,country:string }
 }
 
 interface Params {
@@ -23,6 +23,12 @@ export default async function SearchResultsPage(props: PageProps) {
         props.searchParams.performer,
         props.searchParams.slug
     );
+    APIService.testGeoLocation(
+        props.searchParams.lat,
+        props.searchParams.lon,
+        props.searchParams.country);
+
+
     return (
         <div>
             <NavbarResults></NavbarResults>
