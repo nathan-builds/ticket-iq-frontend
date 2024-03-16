@@ -17,6 +17,7 @@ interface Params {
 
 export default async function SearchResultsPage(props: PageProps) {
     //attempt to disable cache
+    console.log(props.searchParams);
     const _ = cookies();
     const eventsResult = await APIService.getPerformerEvents(
         props.searchParams.performer,

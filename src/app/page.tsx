@@ -13,7 +13,7 @@ export default async function Home() {
 
     return (
         <div>
-            <TempAlert/>
+            {/* <TempAlert/> */}
             <Navbar/>
             <div className="flex flex-col items-center my-20">
                 <div className="font-semibold text-xl md:text-3xl mb-10">
