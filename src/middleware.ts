@@ -23,5 +23,5 @@ export default async function myMiddleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/results",
+  matcher: "/",
 };
