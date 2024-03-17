@@ -6,7 +6,7 @@ import { APIService } from '@/services/apiService';
 import { TempAlert } from '@/components/temp-alert';
 
 interface PageProps {
-    searchParams: { lat?:string,lon?:string,city?:string,region?:string }
+    searchParams: { lat?:string,lon?:string,city?:string,region?:string, country?:string }
 }
 
 export default async function Home(props:PageProps) {
@@ -15,7 +15,8 @@ export default async function Home(props:PageProps) {
         props.searchParams.lat,
         props.searchParams.lon,
         props.searchParams.region,
-        props.searchParams.city
+        props.searchParams.city,
+        props.searchParams.country
         );
 
     return (

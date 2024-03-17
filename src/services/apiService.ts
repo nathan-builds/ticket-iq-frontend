@@ -11,8 +11,9 @@ static CACHE_TIME_SECONDS = 100;
     /**
      * Make request for all the home page suggestions, try to get GeoLocation based suggestions if we have the location
      */
-    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string): Promise<Category[]> => {
+    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string,country?:string): Promise<Category[]> => {
         let url = `${APIService.baseURL}/home/suggest?`;
+
 
         if (lat && lon) {
             url += `lat=${lat}&lon=${lon}`;
@@ -25,7 +26,9 @@ static CACHE_TIME_SECONDS = 100;
         if (city) {
             url += `&city=${city}`;
         }
-
+        if(country){
+            url+=`&country=${country}`
+        }
         const res = await fetch(url, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
