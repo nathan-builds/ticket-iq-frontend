@@ -5,11 +5,18 @@ import { PerformerSlider } from '@/components/performer-slider';
 import { APIService } from '@/services/apiService';
 import { TempAlert } from '@/components/temp-alert';
 
+interface PageProps {
+    searchParams: { lat?:string,lon?:string,city?:string,region?:string }
+}
 
-export default async function Home() {
+export default async function Home(props:PageProps) {
 
-    //test
-    const categories = await APIService.getHomeSuggestions();
+    const categories = await APIService.getHomeSuggestions(
+        props.searchParams.lat,
+        props.searchParams.lon,
+        props.searchParams.region,
+        props.searchParams.city
+        );
 
     return (
         <div>

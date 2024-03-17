@@ -10,9 +10,10 @@ export default async function myMiddleware(request: NextRequest) {
 //   console.log(request);
   // const { city } = geolocation(request);
   console.log(
-    `Middleware got country details of ${geo?.city}, ${geo?.country}, ${geo?.latitude}, ${geo?.longitude} `
+    `Middleware got country details of ${geo?.city}, ${geo?.country}, ${geo?.latitude}, ${geo?.longitude}, ${geo?.region} `
   );
-    url.searchParams.set("country", country);
+    // url.searchParams.set("country", country);
+    url.searchParams.set('region', geo?.region||'unk');
     url.searchParams.set("city", geo?.city || 'unk');
     url.searchParams.set("lat", geo?.latitude || 'unk');
     url.searchParams.set("lon", geo?.longitude||'unk');

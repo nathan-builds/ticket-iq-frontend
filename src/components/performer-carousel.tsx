@@ -18,7 +18,7 @@ export const PerformerCarousel:React.FC<PerformerCarousel>=({performers})=>{
                             <CarouselItem  key={idx} className=''>
                                 <PerformerCard
                                     img={performer.image}
-                                    title={performer.searchString}
+                                    title={performer.performerName}
                                     desc={performer.nextEvent}/>
                             </CarouselItem>);
                     })}

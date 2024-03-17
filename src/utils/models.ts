@@ -88,8 +88,9 @@ export type NextEvent = {
 }
 
 export type Performer = {
+    eventName: string,
+    slug:string,
     performerName: string,
-    searchString: string,
     nextEvent: NextEvent,
     image: string
 }

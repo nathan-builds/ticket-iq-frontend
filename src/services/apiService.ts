@@ -6,16 +6,27 @@ export class APIService {
     static baseURL = 'https://ticket-iq-production.up.railway.app';
     // static baseURL = 'http://localhost:7000';
     // how long a API request for data is cached
-    static CACHE_TIME_SECONDS = 100;
+static CACHE_TIME_SECONDS = 100;
 
     /**
-     * Make request for all the home page suggestions
+     * Make request for all the home page suggestions, try to get GeoLocation based suggestions if we have the location
      */
-    static getHomeSuggestions = async (): Promise<Category[]> => {
+    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string): Promise<Category[]> => {
+        let url = `${APIService.baseURL}/home/suggest?`;
 
+        if (lat && lon) {
+            url += `lat=${lat}&lon=${lon}`;
+        }
 
+        if (region) {
+            url += `&region=${region}`;
+        }
 
-        const res = await fetch(`${APIService.baseURL}/home/suggest`, {
+        if (city) {
+            url += `&city=${city}`;
+        }
+
+        const res = await fetch(url, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
         const json = await res.json();
@@ -105,11 +116,11 @@ export class APIService {
     };
 
 
-    static testGeoLocation = async (lat:string,lon:string,country:string) => {
+    static testGeoLocation = async (lat: string, lon: string, country: string) => {
         const data = {
             lat: lat,
             lon: lon,
-            country:country
+            country: country
         };
 
         const url = `${APIService.baseURL}/test/geo`;
@@ -118,7 +129,7 @@ export class APIService {
             console.log(url);
             const res = await fetch(url, {
                     method: 'POST',
-                body: JSON.stringify({ lat:lat,lon:lon,country:country }),
+                    body: JSON.stringify({ lat: lat, lon: lon, country: country }),
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
@@ -128,8 +139,6 @@ export class APIService {
         }
 
     };
-
-
 
 
 }
