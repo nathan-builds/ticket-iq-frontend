@@ -6,9 +6,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'TicketHero',
-    description: 'A better way to find tickets'
-
+    title: 'TicketHero - Compare tickets, save money.'
 };
 
 export default function RootLayout({
@@ -20,6 +18,10 @@ export default function RootLayout({
         <html lang="en">
         <head>
             <meta name="impact-site-verification" content="0239144c-12e6-41a0-9bda-c45e4e9664f7"/>
+            <meta name="description"
+                  key="desc"
+                  content="Compare tickets, save money. Find the best deals for tickets to your next event!
+                  We show you tickets and fees from multiple sites so you better understand your options."/>
             <link rel="icon" href="/favicon.ico" sizes="any"/>
             <link
                 rel="icon"
