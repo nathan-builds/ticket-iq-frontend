@@ -23,12 +23,6 @@ export default function RootLayout({
                   content="Compare tickets, save money. Find the best deals for tickets to your next event!
                   We show you tickets and fees from multiple sites so you better understand your options."/>
             <link rel="icon" href="/favicon.ico" sizes="any"/>
-            <link
-                rel="icon"
-                href="/src/app/icon.JPG"
-                type="image/<generated>"
-                sizes="any"
-            />
         </head>
         <body className={inter.className}>{children}</body>
         <GoogleAnalytics gaId="G-3KSJG057G7"/>
