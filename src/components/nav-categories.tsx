@@ -3,14 +3,15 @@ import { NavDropdown } from '@/components/nav-dropdown';
 import { ArtistNames, COMEDIANS, MLB_TEAMS, NBA_TEAMS, NFL_TEAMS, NHL_TEAMS } from '@/utils/navData';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { encodeURLString } from '@/utils/utils';
 
 export const NavCategories = () => {
     const router = useRouter();
 
     const onNavItemSelected = (pName: string) => {
-        const performerName = pName.replaceAll(' ', '+');
-        const slug = pName.replaceAll(' ', '-');
-        router.push(`/results?performer=${performerName}&slug=${slug}`);
+        const performerName = encodeURLString(pName);
+
+        router.push(`/results/${performerName}?slug=${performerName}`);
     };
 
     return (

@@ -1,40 +1,39 @@
-'use client'
+'use client';
 import Image, { StaticImageData } from 'next/image';
 
 import image1 from '../images/head_heart.jpg';
 import React from 'react';
 import { NextEvent } from '@/utils/models';
-import {  formatLocalTime } from '@/utils/utils';
+import { encodeURLString, formatLocalTime } from '@/utils/utils';
 import { useRouter } from 'next/navigation';
+import { Performer } from '@/utils/models';
 
 export interface PerformerCardProps {
-    img: string;
-    title: string,
-    desc: NextEvent
+    performer: Performer;
 }
 
-export const PerformerCard: React.FC<PerformerCardProps> = (props) => {
+export const PerformerCard: React.FC<PerformerCardProps> = ({ performer }) => {
     //todo false is just defaulted here for TBD
-    const { dayOfWeek, month, time,day } = formatLocalTime(props.desc?.date,false);
-    const venue = props.desc.venue;
+    const { dayOfWeek, month, time, day } = formatLocalTime(performer?.nextEvent.date, false);
+    const venue = performer.nextEvent.venue;
     const router = useRouter();
 
     //todo fix this so that its only done in one spot maybe?
-    const onPerformerClickedHandler=()=>{
-        const performerName = props.title.replaceAll(' ', '+');
-        const slug=props.title.replaceAll(' ','-').toLowerCase();
-        router.push(`/results?performer=${performerName}&slug=${slug}`);
-    }
+    const onPerformerClickedHandler = () => {
+        const performerName = encodeURLString(performer.performerName);
+        router.push(`/results/${performerName}?slug=${performer.slug}`);
+    };
 
     return (
         <div
             onClick={onPerformerClickedHandler}
             className="flex pl-2 flex-col min-h-[175px] min-w-[150px] max-w-[150px]  lg:min-h[450px] lg:min-w-[200px] hover:cursor-pointer z-0 ">
             <div className="rounded-lg border-transparents ">
-                <img src={props.img} className={'rounded-lg border-transparent object-cover transition-all hover:scale-105'}/>
+                <img src={performer.image}
+                     className={'rounded-lg border-transparent object-cover transition-all hover:scale-105'}/>
             </div>
             <div className="font-semibold text-md lg:text-xl whitespace-nowrap overflow-hidden text-ellipsis">
-                {props.title}
+                {performer.performerName}
             </div>
             <div className="whitespace-nowrap overflow-hidden text-ellipsis text-[#475569]">
                 {`${month} ${day} - ${venue}`}

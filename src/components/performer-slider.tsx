@@ -19,9 +19,8 @@ export const PerformerSlider: React.FC<PerformerSliderProps> = ({ performers }) 
                     return (
                         <PerformerCard
                             key={idx}
-                            img={performer.image}
-                            title={performer.performerName}
-                            desc={performer.nextEvent}/>);
+                            performer={performer}
+                        />);
                 })}
                 <ScrollBar orientation="horizontal"/>
             </div>

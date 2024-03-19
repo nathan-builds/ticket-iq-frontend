@@ -6,28 +6,35 @@ export class APIService {
     static baseURL = 'https://ticket-iq-production.up.railway.app';
     // static baseURL = 'http://localhost:7000';
     // how long a API request for data is cached
-static CACHE_TIME_SECONDS = 100;
+    static CACHE_TIME_SECONDS = 100;
+
+    static getSiteMapDetails = async (): Promise<string[]> => {
+        const url = `${APIService.baseURL}/sitemap`;
+        const res = await fetch(url);
+        const json = await res.json();
+        return json['slugs'];
+    };
 
     /**
      * Make request for all the home page suggestions, try to get GeoLocation based suggestions if we have the location
      */
-    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string,country?:string): Promise<Category[]> => {
+    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string, country?: string): Promise<Category[]> => {
         let url = `${APIService.baseURL}/home/suggest?`;
 
 
-        if (lat && lon) {
+        if (lat !== 'unk' && lon !== 'unk') {
             url += `lat=${lat}&lon=${lon}`;
         }
 
-        if (region) {
+        if (region !== 'unk') {
             url += `&region=${region}`;
         }
 
-        if (city) {
+        if (city !== 'unk') {
             url += `&city=${city}`;
         }
-        if(country){
-            url+=`&country=${country}`
+        if (country !== 'unk') {
+            url += `&country=${country}`;
         }
         const res = await fetch(url, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
@@ -43,8 +50,7 @@ static CACHE_TIME_SECONDS = 100;
      * @param slug there will be a slug if the item was selected and not manually typed
      */
     static getPerformerEvents = async (performer: string, slug: string | undefined): Promise<EventsResult> => {
-        let performerFormatted = performer.replaceAll(' ', '+');
-        const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performerFormatted}${slug ? `&slug=${slug}` : ''} `,
+        const res = await fetch(` ${APIService.baseURL}/events/find?performer=${performer}${slug ? `&slug=${slug}` : ''} `,
             { cache: 'no-store' });
         const json = await res.json();
 

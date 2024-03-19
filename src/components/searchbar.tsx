@@ -1,8 +1,9 @@
 'use client';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { useEffect, useState } from 'react';
-import { Map, SeatGeekAutoCompleteResponse, TicketMasterSearchResponse } from '@/utils/models';
+import { Map, SeatGeekAutoCompleteResponse } from '@/utils/models';
 import { useRouter } from 'next/navigation';
+import { encodeURLString } from '@/utils/utils';
 
 
 const apiKey = 'p5Da9bnXsBrs5a00fJw8oTJM9GSffNDw';
@@ -142,9 +143,8 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
         if (!item || item.id === -1) {
             return;
         }
-        const performerName = item.name.replaceAll(' ', '+');
-        router.push(`/results?performer=${performerName}${item.slug ? `&slug=${item.slug}` : ''}`);
-
+        const performerName =encodeURLString(item.name);
+        router.push(`/results/${performerName}?${item.slug ? `slug=${item.slug}` : ''}`);
     };
 
 
