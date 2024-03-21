@@ -39,7 +39,7 @@ export default function ContactPage() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         if (values) {
             APIService
-                .sendContactForm(values.subject, values.email, values.subject)
+                .sendContactForm(values.subject, values.email, values.body)
                 .then(e => {
                     setIsSubmitted(true);
                 })
