@@ -3,8 +3,8 @@ import { count } from 'console';
 import { parse } from 'node-html-parser';
 
 export class APIService {
-    static baseURL = 'https://ticket-iq-production.up.railway.app';
-    // static baseURL = 'http://localhost:7000';
+    // static baseURL = 'https://ticket-iq-production.up.railway.app';
+    static baseURL = 'http://localhost:7000';
     // how long a API request for data is cached
     static CACHE_TIME_SECONDS = 100;
 
@@ -146,6 +146,28 @@ export class APIService {
         } catch (e) {
             console.log('Could not perform log post.');
         }
+
+    };
+
+    static sendContactForm = async (subject: string, fromEmail: string, message: string) => {
+
+        const url = `${APIService.baseURL}/contact`;
+        try {
+            const res = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        subject: subject,
+                        fromEmail: fromEmail,
+                        message: message
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+
+        } catch (e) {
+            console.log('Could not perform log post.');
+        }
+
 
     };
 

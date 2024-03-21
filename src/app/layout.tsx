@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Graduate, Inter } from 'next/font/google';
 import './globals.css';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Footer } from '@/components/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
                   We show you tickets and fees from multiple sites so you better understand your options."/>
             <link rel="icon" href="/favicon.ico" sizes="any"/>
         </head>
-        <body className={inter.className}>{children}</body>
+        <body className={`{inter.className`}>
+        {children}
+        </body>
         <GoogleAnalytics gaId="G-3KSJG057G7"/>
         </html>
     );

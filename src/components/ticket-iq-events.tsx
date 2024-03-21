@@ -51,7 +51,7 @@ export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort, incl
      * Only display the More button if there are more events AND there is no City filter active
      */
     return (
-        <div>
+        <div className="mb-10">
             <div className="flex flex-col mb-3 ">
                 {events
                     .filter(cityFilterFunc)
@@ -60,7 +60,7 @@ export const TicketIqEvents: React.FC<SearchResultProps> = ({ events, sort, incl
                     .map((event, idx) =>
                         (<Event key={idx} eventInfo={event} includeFees={includeFees}/>))}
             </div>
-            <div>{includeFees&& '*VividSeats estimated fees'}</div>
+            <div>{includeFees && '*VividSeats estimated fees'}</div>
             <div className="flex flex-row justify-center">
                 <Button className={`w-1/5 h-[35px] ${displayIdx < events.length && cityFilter === NO_CITY_FILTER
                     ? 'visible' : 'invisible'}`}

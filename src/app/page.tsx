@@ -4,6 +4,7 @@ import { Searchbar } from '@/components/searchbar';
 import { PerformerSlider } from '@/components/performer-slider';
 import { APIService } from '@/services/apiService';
 import { TempAlert } from '@/components/temp-alert';
+import { Footer } from '@/components/footer';
 
 interface PageProps {
     searchParams: { lat?:string,lon?:string,city?:string,region?:string, country?:string }
@@ -40,6 +41,7 @@ export default async function Home(props:PageProps) {
                     );
                 })}
             </div>
+            <Footer/>
         </div>
 
     );
