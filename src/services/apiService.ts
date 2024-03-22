@@ -3,11 +3,11 @@ import { count } from 'console';
 import { parse } from 'node-html-parser';
 
 export class APIService {
-    static baseURL = 'https://ticket-iq-production.up.railway.app';
+
+    static baseURL = (process.env.NODE_ENV === 'development' ? 'http://localhost:7000' : 'https://ticket-iq-production.up.railway.app');
     // static baseURL = 'http://localhost:7000';
     // how long a API request for data is cached
     static CACHE_TIME_SECONDS = 100;
-
     static getSiteMapDetails = async (): Promise<string[]> => {
         const url = `${APIService.baseURL}/sitemap`;
         const res = await fetch(url);
@@ -19,6 +19,7 @@ export class APIService {
      * Make request for all the home page suggestions, try to get GeoLocation based suggestions if we have the location
      */
     static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string, country?: string): Promise<Category[]> => {
+
         let url = `${APIService.baseURL}/home/suggest?`;
 
 
