@@ -161,7 +161,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
                 placeholderColor: '#000000',
                 iconColor: '#15AB99'
             }}
-            placeholder={'Find Performer'}
+            placeholder={'Search performers...'}
             className="search"
             onSearch={onUserSearchSeatGeek}
             formatResult={formatResult}

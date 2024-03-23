@@ -82,15 +82,21 @@
     /*.search .wrapper:first-child svg {*/
     /*    @apply  !important;*/
     /*}*/
-
-
     .search .wrapper:first-child input {
         @apply border-4 !important;
     }
 
 
+.search .wrapper:first-child input {
+    opacity: 0.5;
+    font-size: medium;
+    font-size: medium;
+    font-style:italic;
+}
+
+
     .search .wrapper:first-child {
-        @apply shadow-xl z-20 font-bold !important;
+        @apply shadow-xl z-20  !important;
     }
 }
 
