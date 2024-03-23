@@ -42,7 +42,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
             <div className="flex flex-col gap-5">
                 <div className="flex items-center space-x-2 justify-between pl-1">
                     <div className="flex items-center space-x-2">
-                        <Switch id="fees" className="w-[40px] h-[25px]" onClick={onIncludeFeesHandler}/>
+                        <Switch id="fees" className="w-[45px] h-[25px] pl-[2px]" onClick={onIncludeFeesHandler}/>
                         <Label className="md:text-lg" htmlFor="fees"> Include Fees</Label>
                     </div>
                     <div className="flex gap-1">
