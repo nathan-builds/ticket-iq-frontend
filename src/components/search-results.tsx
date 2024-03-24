@@ -3,11 +3,12 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import ResultsFilter, { Sort, SortType } from '@/components/results-filter';
 import { TicketIqEvents } from '@/components/ticket-iq-events';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TicketIQEvent } from '@/utils/models';
 import { CityFilter, NO_CITY_FILTER } from '@/components/city-filter';
 import { getListOfUniqueLocations } from '@/utils/utils';
 import { CalendarFilter } from '@/components/calendar-filter';
+import { useToast } from '@/components/ui/use-toast';
 
 interface SearchResultsProps {
     events: TicketIQEvent[];
@@ -21,6 +22,24 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
     const [includeFees, setIncludeFees] = useState(false);
     const [cityFilter, setCityFilter] = useState<string>(NO_CITY_FILTER);
     const eventLocations = getListOfUniqueLocations(events);
+    const { toast } = useToast();
+
+    useEffect(() => {
+
+        // If we have already shown the user this toast on the first search, don't show it again
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('toasted')) {
+            return;
+        }
+
+        toast({
+            title: 'TicketHero Assistant',
+            description: 'We strive to present the most accurate and current ticket prices, ' +
+                'some displayed tickets may sell out resulting in a different price. No need to panic—more enticing deals await!',
+            duration: 10000
+        });
+        localStorage.setItem('toasted', 'true');
+
+    }, []);
 
     const onFilterSelectionChangeHandler = (filter: SortType) => {
         setSortType(filter);
@@ -33,9 +52,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({ events }) => {
     const onIncludeFeesHandler = () => {
         setIncludeFees(!includeFees);
     };
-
-  
-
 
     return (
         <div className="flex flex-col w-full lg:w-1/2  max-w-[900px]">

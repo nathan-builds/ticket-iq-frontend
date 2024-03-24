@@ -104,7 +104,7 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
         <div>
             <Accordion type="single" collapsible className="min-w-[350px] w-full ">
                 <AccordionItem value="item-1">
-                    <AccordionTrigger >
+                    <AccordionTrigger>
                         <div className="flex ">
                             <div className="w-[110px] flex flex-col items-start md:w-[150px] gap-1">
                                 <span className="font-bold text-md">{`${month} ${day}`}</span>
@@ -128,21 +128,19 @@ export const Event: React.FC<EventProps> = ({ eventInfo, includeFees }) => {
                         </div>
                     </AccordionTrigger>
 
-
                     {loadingPrices ?
                         <AccordionContent className="flex items-center justify-center">
                             <PuffLoader
                                 size={50}/>
                         </AccordionContent> :
                         //using stub hub separate temp component for now
-                        <AccordionContent className="flex flex-col gap-1 ">
+                        <AccordionContent className="flex flex-col  ">
                             {eventInfo.vendors
                                 .map((vendor, idx) => {
                                     return (vendor.vendor.name === 'stub_hub' ?
                                         <StubHubVendor key={idx} vendor={vendor} includeFees={includeFees}/> :
                                         <Vendor key={idx} vendor={vendor} includeFees={includeFees}/>);
                                 })}
-                            {/*{stubHubEvent? <StubHubVendor vendor={stubHubEvent} includeFees={includeFees}/>:<div/>}*/}
                         </AccordionContent>
 
                     }

@@ -4,7 +4,7 @@ import { parse } from 'node-html-parser';
 
 export class APIService {
 
-    static baseURL = (process.env.NODE_ENV === 'development' ? 'http://localhost:7000' : 'https://ticket-iq-production.up.railway.app');
+    static baseURL = (process.env.NODE_ENV === 'development' ? 'http://localhost:9002' : 'https://ticket-iq-production.up.railway.app');
     // static baseURL = 'http://localhost:7000';
     // how long a API request for data is cached
     static CACHE_TIME_SECONDS = 100;

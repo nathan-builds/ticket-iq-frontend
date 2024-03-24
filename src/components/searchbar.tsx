@@ -143,7 +143,7 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
         if (!item || item.id === -1) {
             return;
         }
-        const performerName =encodeURLString(item.name);
+        const performerName = encodeURLString(item.name);
         router.push(`/results/${performerName}?${item.slug ? `slug=${item.slug}` : ''}`);
     };
 
@@ -158,10 +158,10 @@ export const Searchbar: React.FC<SearchBarProps> = (props) => {
                 border: '1px solid #cdcdcd',
                 height: `${props.height}px`,
                 borderRadius: `${props.borderRadius}px`,
-                placeholderColor: '#000000',
+                placeholderColor: '#a6a6a6',
                 iconColor: '#15AB99'
             }}
-            placeholder={'Search performers...'}
+            placeholder={'Search artist or team...'}
             className="search"
             onSearch={onUserSearchSeatGeek}
             formatResult={formatResult}

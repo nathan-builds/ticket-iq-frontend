@@ -1,4 +1,5 @@
 import { Footer } from '@/components/footer';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function ResultsLayout({
                                           children // will be a page or nested layout
@@ -8,6 +9,7 @@ export default function ResultsLayout({
     return (
         <div className="flex flex-col min-h-screen">
             {children}
+            <Toaster/>
             <Footer/>
         </div>
     );
