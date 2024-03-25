@@ -4,7 +4,7 @@ import ticketIQIcon1 from '../images/logo/fulllogo_nobuffer.jpg';
 import searchIcon from '../images/search_icon.svg';
 import { useState } from 'react';
 import Link from 'next/link';
-import { NavCategories } from '@/components/nav-categories';
+import { NavCategories } from '@/components/navbar/nav-categories';
 
 
 export const NavbarResults = () => {
