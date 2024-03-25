@@ -59,12 +59,27 @@ export default function AboutPage() {
             </div>
             <div className="w-11/12 md:w-1/2">
                 <h3 className="font-bold text-2xl pb-3">
-                    Stay Tuned!
+                    Disclosure
                 </h3>
                 <div>
-                    More ticket sites are currently in the works and will be added when ready to continue to help
-                    you
-                    make the best choices for you next event!
+                    TicketHero is a comparison site that allows you to compare tickets from other ticket resellers.
+                    This means the TicketHero does <b><u>not</u></b> own, or sell any tickets directly. Any purchase of
+                    tickets is done through a reseller once you are redirected to their site. We currently show tickets
+                    from the following resellers:
+                    <ul className="list-disc list-inside mt-5 mb-5">
+                        <li><b>StubHub</b>: <a className="underline"
+                                               href=" https://stubhub.prf.hn/click/camref:1011l3CAuv"> www.stubhub.com</a>
+                        </li>
+                        <li><b>VividSeats</b>: <a className="underline"
+                                                  href="https://vivid-seats.pxf.io/Mmxogo"> www.vividseats.com</a></li>
+                        <li><b>SeatGeek</b>:
+                            <a className="underline" href="https://seatgeek.com/"> seatgeek.com</a>
+                        </li>
+                        <li><b>Gametime</b>:
+                            <a className="underline" href="https://gametime.co/"> gametime.co</a>
+                        </li>
+                    </ul>
+                    Stay tuned as we continue to add more sites and enhance your ticket searching!
                 </div>
             </div>
         </div>
