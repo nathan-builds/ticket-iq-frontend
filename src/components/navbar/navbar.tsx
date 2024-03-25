@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import ticketIQIcon from '../images/logo_lowercase_32.svg';
 import Link from 'next/link';
-import ticketIQIcon1 from '../images/logo/fulllogo_nobuffer.jpg';
-import { NavCategories } from '@/components/nav-categories';
+import ticketIQIcon1 from '../../images/logo/fulllogo_nobuffer.jpg';
+import { NavCategories } from '@/components/navbar/nav-categories';
 
 export const Navbar = () => {
     return (

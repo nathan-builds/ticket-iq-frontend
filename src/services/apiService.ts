@@ -1,4 +1,12 @@
-import { Category, EventsMap, EventsResult, Production, Productions, VendorPartial } from '@/utils/models';
+import {
+    Category,
+    EventsMap,
+    EventsResult,
+    LocalSuggestions,
+    Production,
+    Productions,
+    VendorPartial
+} from '@/utils/models';
 import { count } from 'console';
 import { parse } from 'node-html-parser';
 
@@ -13,30 +21,17 @@ export class APIService {
         const res = await fetch(url);
         const json = await res.json();
         return json['slugs'];
+
     };
 
     /**
      * Make request for all the home page suggestions, try to get GeoLocation based suggestions if we have the location
      */
-    static getHomeSuggestions = async (lat?: string, lon?: string, region?: string, city?: string, country?: string): Promise<Category[]> => {
+    static getHomeSuggestions = async (): Promise<Category[]> => {
 
-        let url = `${APIService.baseURL}/home/suggest?`;
+        let url = `${APIService.baseURL}/home/suggest`;
 
 
-        if (lat !== 'unk' && lon !== 'unk') {
-            url += `lat=${lat}&lon=${lon}`;
-        }
-
-        if (region !== 'unk') {
-            url += `&region=${region}`;
-        }
-
-        if (city !== 'unk') {
-            url += `&city=${city}`;
-        }
-        if (country !== 'unk') {
-            url += `&country=${country}`;
-        }
         const res = await fetch(url, {
             next: { revalidate: APIService.CACHE_TIME_SECONDS }
         });
@@ -44,6 +39,35 @@ export class APIService {
         return json['data'] as Category[];
 
     };
+
+
+    /**
+     * Get local suggestions based on lat lon of user, if any of the params are missing here, cannot make request, return null to signify
+     * no suggestions.
+     * @param lat
+     * @param lon
+     * @param region
+     * @param city
+     * @param country
+     */
+    static getLocalSuggestions = async (lat?: string, lon?: string, region?: string, city?: string, country?: string): Promise<LocalSuggestions | null> => {
+        //if we are missing params, we cannot make the request
+        if (lat === 'unk' || lon === 'unk' || region === 'unk' || city === 'unk' || country === 'unk') {
+            return null;
+        }
+        let url = `${APIService.baseURL}/home/local?lat=${lat}&lon=${lon}&city=${city}&country=${country}&region=${region}`;
+
+        const res = await fetch(url, {
+            next: { revalidate: APIService.CACHE_TIME_SECONDS }
+        });
+
+        const json = await res.json();
+        console.log(json);
+        return json as LocalSuggestions;
+
+    };
+
+
     /**
      * Convert the string to the correct format by replacing spaces. Then make a request to the
      * backend for all the given events for a performer

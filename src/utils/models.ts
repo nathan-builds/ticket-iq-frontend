@@ -1,7 +1,6 @@
-
 import { StaticImageData } from 'next/image';
 
-export type Map<T>={[index:string]:T};
+export type Map<T> = { [index: string]: T };
 
 export type TicketMasterSearchResponse = {
     _embedded: {
@@ -22,20 +21,20 @@ export type Image = {
 
 export type EventsMap = { [index: string]: TicketIQEvent }
 
-export type VendorName = 'seat_geek' | 'gametime' | 'vivid_seats'|'stub_hub'
+export type VendorName = 'seat_geek' | 'gametime' | 'vivid_seats' | 'stub_hub'
 
 export type Vendor = {
     name: VendorName,
-    shortName:string,
+    shortName: string,
     displayName: string
 }
 
-export type Productions={[index:string]:Production}
-export type Production={
-    vendorName:VendorName,
-    displayName:string,
-    minPrice:number,
-    priceWithFees:number
+export type Productions = { [index: string]: Production }
+export type Production = {
+    vendorName: VendorName,
+    displayName: string,
+    minPrice: number,
+    priceWithFees: number
 }
 
 export type VendorEvent = {
@@ -57,8 +56,8 @@ export type VendorPartial = Omit<VendorEvent,
 
 export type TicketIQEvent = {
     datetime_utc: string,
-    datetime_local:string,
-    time_tbd:boolean,
+    datetime_local: string,
+    time_tbd: boolean,
     minPrice: number,
     minPriceUrl: string,
     priceWithFees: number,
@@ -82,6 +81,13 @@ export type Category = {
     performers: Performer[]
 }
 
+export type LocalSuggestions = {
+    locationFormatted: string,
+    city: string,
+    region: string,
+    performers: Performer[]
+}
+
 export type NextEvent = {
     venue: string,
     date: string
@@ -89,7 +95,7 @@ export type NextEvent = {
 
 export type Performer = {
     eventName: string,
-    slug:string,
+    slug: string,
     performerName: string,
     nextEvent: NextEvent,
     image: string
@@ -108,12 +114,12 @@ export type TicketMasterImage = {
     fallback: boolean
 }
 
-export type SeatGeekAutoCompleteResponse={
-    performers:[
+export type SeatGeekAutoCompleteResponse = {
+    performers: [
         {
-            type:string,
-            name:string,
-            slug:string
+            type: string,
+            name: string,
+            slug: string
         }
     ]
 }

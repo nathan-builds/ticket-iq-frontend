@@ -1,25 +1,29 @@
-import Image from 'next/image';
-import { Navbar } from '@/components/navbar';
 import { Searchbar } from '@/components/searchbar';
-import { PerformerSlider } from '@/components/performer-slider';
+import { PerformerSlider } from '@/components/performer/performer-slider';
 import { APIService } from '@/services/apiService';
-import { TempAlert } from '@/components/temp-alert';
 import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/navbar/navbar';
+import { LocalizedSuggestions } from '@/components/localized-suggestions';
 
 interface PageProps {
-    searchParams: { lat?:string,lon?:string,city?:string,region?:string, country?:string }
+    searchParams: { lat?: string, lon?: string, city?: string, region?: string, country?: string };
 }
 
-export default async function Home(props:PageProps) {
+export default async function Home(props: PageProps) {
 
-    const categories = await APIService.getHomeSuggestions(
+
+    const categories = await APIService.getHomeSuggestions();
+    const localSuggestions = await APIService.getLocalSuggestions(
         props.searchParams.lat,
         props.searchParams.lon,
         props.searchParams.region,
         props.searchParams.city,
         props.searchParams.country
-        );
+    );
 
+    /**
+     * If there are local suggestions use them to populate the local suggestions component
+     */
     return (
         <div>
             <Navbar/>
@@ -30,6 +34,10 @@ export default async function Home(props:PageProps) {
                 <div className="w-11/12 lg:w-1/2">
                     <Searchbar color={'#15AB99'} borderRadius={15} height={55}/>
                 </div>
+                {
+                    localSuggestions && <LocalizedSuggestions suggestions={localSuggestions}/>
+                }
+
                 {categories.map((category, idx) => {
                     return (
                         <div key={idx} className="w-11/12">

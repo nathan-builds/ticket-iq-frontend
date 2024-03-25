@@ -1,9 +1,10 @@
 'use client';
-import { NavDropdown } from '@/components/nav-dropdown';
+
 import { ArtistNames, COMEDIANS, MLB_TEAMS, NBA_TEAMS, NFL_TEAMS, NHL_TEAMS } from '@/utils/navData';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { encodeURLString } from '@/utils/utils';
+import { NavDropdown } from '@/components/navbar/nav-dropdown';
 
 export const NavCategories = () => {
     const router = useRouter();

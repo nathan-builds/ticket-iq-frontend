@@ -1,9 +1,5 @@
 'use client';
-import Image, { StaticImageData } from 'next/image';
-
-import image1 from '../images/head_heart.jpg';
 import React from 'react';
-import { NextEvent } from '@/utils/models';
 import { encodeURLString, formatLocalTime } from '@/utils/utils';
 import { useRouter } from 'next/navigation';
 import { Performer } from '@/utils/models';

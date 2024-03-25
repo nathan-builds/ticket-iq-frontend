@@ -1,9 +1,7 @@
 import * as React from 'react';
-import Image from 'next/image';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { PerformerCard } from '@/components/performer-card';
-import { testCardImages } from '@/utils/testData';
+import { PerformerCard } from '@/components/performer/performer-card';
 import { Performer } from '@/utils/models';
 
 
