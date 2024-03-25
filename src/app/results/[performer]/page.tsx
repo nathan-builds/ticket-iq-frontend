@@ -1,4 +1,4 @@
-import { NavbarResults } from '@/components/navbar-results';
+import { NavbarResults } from '@/components/navbar/navbar-results';
 import { APIService } from '@/services/apiService';
 import React from 'react';
 import SearchResults from '@/components/search-results';
