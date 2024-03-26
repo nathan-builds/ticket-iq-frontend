@@ -62,7 +62,13 @@ export class APIService {
         });
 
         const json = await res.json();
-        console.log(json);
+
+        //todo make this better temp fix for now
+        const performers = json['performers'] as [];
+        if (performers.length === 0) {
+            return null;
+        }
+
         return json as LocalSuggestions;
 
     };
