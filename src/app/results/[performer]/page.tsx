@@ -17,7 +17,6 @@ interface Params {
 }
 
 export default async function SearchResultsPage(props: PageProps) {
-    console.log(`performer is ${props.params.performer}`);
     // const _ = cookies();
     const eventsResult = await APIService.getPerformerEvents(
         props.params.performer,

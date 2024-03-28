@@ -1,7 +1,34 @@
 import moment from 'moment-timezone';
 import { FilterItem } from '@/components/city-filter';
-import { TicketIQEvent } from '@/utils/models';
+import { TicketIQEvent, Location } from '@/utils/models';
 import { Map } from './models';
+
+
+/**
+ * Is geo location available for the user, make sure they are in the US or Canada and all the params
+ * here must be present. Undefined if no location available
+ * @param lat
+ * @param lon
+ * @param country
+ * @param region
+ * @param city
+ */
+export const isGeoLocationAvailable = (lat: string, lon: string, country: string, region: string, city: string): Location | undefined => {
+    if (country === 'US' || country === 'CA') {
+        if (lat !== 'unk' && lon !== 'unk' && region !== 'unk' && city !== 'unk') {
+            return {
+                lat: lat,
+                lon: lon,
+                country: country,
+                state_code: region,
+                name: city
+            };
+        }
+    }
+    // not in Canada or the US or one val not present
+    return undefined;
+};
+
 
 /**
  * Convert string to Month,day, time and day of week. First need to check if there is actually a time,

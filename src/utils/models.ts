@@ -19,6 +19,15 @@ export type Image = {
     ration: string
 }
 
+export type Location = {
+    country: string,
+    lat: string,
+    lon: string,
+    name: string,
+    state_code: string,
+
+}
+
 export type EventsMap = { [index: string]: TicketIQEvent }
 
 export type VendorName = 'seat_geek' | 'gametime' | 'vivid_seats' | 'stub_hub'
