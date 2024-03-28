@@ -6,9 +6,11 @@ import { Performer } from '@/utils/models';
 
 export interface PerformerCardProps {
     performer: Performer;
+    className?: string,
+
 }
 
-export const PerformerCard: React.FC<PerformerCardProps> = ({ performer }) => {
+export const PerformerCard: React.FC<PerformerCardProps> = ({ performer, className }) => {
     //todo false is just defaulted here for TBD
     const { dayOfWeek, month, time, day } = formatLocalTime(performer?.nextEvent.date, false);
     const venue = performer.nextEvent.venue;
@@ -23,8 +25,8 @@ export const PerformerCard: React.FC<PerformerCardProps> = ({ performer }) => {
     return (
         <div
             onClick={onPerformerClickedHandler}
-            className="flex pl-2 flex-col min-h-[175px] min-w-[150px] max-w-[150px]  lg:min-h[450px] lg:min-w-[200px] hover:cursor-pointer z-0 ">
-            <div className="rounded-lg border-transparents ">
+            className={className||''}>
+            <div className="rounded-lg border-transparents flex">
                 <img src={performer.image}
                      className={'rounded-lg border-transparent object-cover transition-all hover:scale-105'}/>
             </div>
