@@ -13,8 +13,12 @@ import { parse } from 'node-html-parser';
 
 export class APIService {
 
-    static baseURL = (process.env.NODE_ENV === 'development' ? 'http://localhost:9002' : 'https://ticket-iq-production.up.railway.app');
+    // static baseURL = (process.env.NODE_ENV === 'development' ? 'http://localhost:9002' : 'https://ticket-iq-production.up.railway.app');
     // static baseURL = 'http://localhost:7000';
+    /**
+     * For staging environment
+     */
+    static baseURL = 'https://ticket-iq-staging.up.railway.app';
     // how long a API request for data is cached
     static CACHE_TIME_SECONDS = 100;
     static getSiteMapDetails = async (): Promise<string[]> => {
@@ -58,7 +62,8 @@ export class APIService {
      * @param city
      * @param country
      */
-    static getLocalSuggestions = async (location: Location): Promise<LocalSuggestions | null> => {
+    static getLocalSuggestions
+        = async (location: Location): Promise<LocalSuggestions | null> => {
         //if we are missing params, we cannot make the request
         if (!location) {
             return null;
